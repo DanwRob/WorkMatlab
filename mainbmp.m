@@ -16,7 +16,7 @@ clear all; clc; close all; %Limpia todo antes de empezar
 
 
 
-i1 = fopen('bus_4bits_color.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
+i1 = fopen('bus_8bits_color.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
 i2 = fopen('bus_8bits_gray.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
 if(i1~=-1&&i2~=-1)
     
