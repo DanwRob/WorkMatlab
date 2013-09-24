@@ -23,6 +23,7 @@ if(i1~=-1)
    
     Salida=bwlabeling(Isalida);
     
+    Salida=label2rgb(Salida);
     if(flag~=0)
         
         figure('Name','Practica 1: Leer un archivo BMP con color indexado de 8-bits');
