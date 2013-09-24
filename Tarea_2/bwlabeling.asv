@@ -11,8 +11,8 @@ end
 Ne=0;
 
 tabla=[0,0];
-for i = 2:y+1
-        for j=2:x+1
+for i = 2:y
+        for j=2:x
             lx=I(i,j);
             if(lx~=0)
                 if(I(i,j-1)==0&&I(i-1,j)==0)
@@ -40,13 +40,10 @@ for i = 1:y
         Salida(i,:)= I(i+1,2:end);% Se Extrae la Matriz de la imagen agregando un paddin de 0
             
 end
-Salida
-Ne
-clases=1:Ne;
+clases=1:tabla(end,end);
 
 b=eye(length(clases));
 aux=length(tabla(:,1));
-
 for i=2:aux
     b(tabla(i,1),tabla(i,2))=1;
     b(tabla(i,2),tabla(i,1))=1;
@@ -63,7 +60,6 @@ for i=1:length(clases)
         end
     end
 end
-length(clases)
 for i=1:length(clases)
     for j=1:length(clases)
         if(Bm(i,j)==1)
@@ -71,14 +67,14 @@ for i=1:length(clases)
         end
     end
 end
+clases
 idx = unique(Salida(:));
-length(idx)
 for i = 2:length(idx)
-        ind = Salida==idx(i);
-        Salida(ind)=clases(i-1);
+        
+        ind = Salida==idx(i)
+        
 end
-
-Salida=label2rgb(Salida);
+Salida=label2rgb(Bm);
 
 
 
