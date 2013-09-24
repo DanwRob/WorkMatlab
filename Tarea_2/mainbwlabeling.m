@@ -16,11 +16,13 @@ clear all; clc; close all; %Limpia todo antes de empezar
 
 
 
-i1 = fopen('prueba.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
+i1 = fopen('new4.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
 if(i1~=-1)
     
     [Isalida,flag]=readbmp(i1);%llama a la funcion readbmp, le pasa el valor si encuentra los archivo
-    Salida=bwedge(Isalida);
+   
+    Salida=bwlabeling(Isalida);
+    
     if(flag~=0)
         
         figure('Name','Practica 1: Leer un archivo BMP con color indexado de 8-bits');

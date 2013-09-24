@@ -26,9 +26,9 @@ if(i1~=-1&&i2~=-1)
     if(flag~=0&&flag2~=0)
         
         figure('Name','Practica 1: Leer un archivo BMP con color indexado de 8-bits');
-        subplot(1,2,1); imshow(Isalida,[]); % Muestra la Imagen 1
+        subplot(1,2,1); imshow(Isalida,[0 255]); % Muestra la Imagen 1
         title('BMP de 8 bits a color') 
-        subplot(1,2,2); imshow(Isalida2,[]); % Muestra la imagen 2
+        subplot(1,2,2); imshow(Isalida2,[0 255]); % Muestra la imagen 2
         title('BMP de 8 bits a escala de grises') 
         fclose(i1);
         fclose(i2);
