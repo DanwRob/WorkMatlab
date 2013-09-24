@@ -47,6 +47,15 @@ for i=2:aux
     b(tabla(i,1),tabla(i,2))=1;
     b(tabla(i,2),tabla(i,1))=1;
 end
+
+for i=2:aux
+    for j=2:aux
+        if(tabla(i,j)==1)
+            
+        end
+    end
+end
+
 b
 Salida=label2rgb(Salida);
 
