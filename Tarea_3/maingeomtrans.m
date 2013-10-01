@@ -3,11 +3,11 @@
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 19 de Septiembre 2013
+% Fecha: 30 de Septiembre 2013
 % 
-% Tarea No:1
+% Tarea No:3
 % 
-% Titulo: Leer un archivo BMP con color indexado de 8-bits
+% Titulo: Transformaciones Geometricas
 % 
 % ------------------------------------------------------------------------
 
@@ -16,25 +16,28 @@ clear all; clc; close all; %Limpia todo antes de empezar
 
 
 
-i1 = fopen('letra_f.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
+i1 = fopen('letra_k.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
 if(i1~=-1)
     
     [Isalida,flag]=readbmp(i1);%llama a la funcion readbmp, le pasa el valor si encuentra los archivo
    
-    Salida=geom(Isalida,'TSR',{'10 5','1 1','-58'});
+    [Salida,interSalida]=geomtrans(Isalida,'RTS',{'-30';'12 13';'2 2'});%llama la funcion para aplicar las transformaciones
     
     
     if(flag~=0)
         
-        figure('Name','Practica 1: Leer un archivo BMP con color indexado de 8-bits');
-        subplot(1,2,1); imshow(Isalida,[]); % Muestra la Imagen 1
-        title('BMP de 8 bits a color') 
-        subplot(1,2,2); imshow(Salida,[]); % Muestra la imagen 2
-        title('BMP de 8 bits a escala de grises') 
+        figure('Name','Practica 2: Tranformadas Geometricas');
+        subplot(2,2,1); imagesc(Isalida); colormap(gray); % Muestra la Imagen Original
+        title('Imagen Original') 
+        subplot(2,2,3); imagesc(Salida); colormap(gray); % Muestra la Imagen Tranformada
+        title('Imagen Transformada') 
+        subplot(2,2,4); imagesc(interSalida); colormap(gray);  % Muestra la imagen Interpolada
+        title('Imagen Interpolada') 
         fclose(i1);
         
    
     end
 else
-    Error='Imagen no existe favor de verificar ruta'
+    disp('Imagen no existe favor de verificar ruta');
+   
 end
