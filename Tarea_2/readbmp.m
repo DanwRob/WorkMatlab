@@ -1,16 +1,14 @@
 % ------------------------------------------------------------------------
-% --------- P R O C E S A M I E N T O   D E   I M A G E N E S ------------
-% ------------------------------------------------------------------------
+% Materia: Procesamiento Digital de Imagenes
 %
-% Dan Williams Robledo Cruz
+% Nombre: Dan Williams Robledo Cruz
 % 
-% 01 de Octubre 2013
+% Fecha: 02 de Octubre 2013
 % 
-% Tarea #1
+% Tarea No:2
 % 
-% Leer un archivo BMP con color indexado de 8-bits
+% Titulo: Practica 2 Relacion entre Pixeles
 % 
-%
 % ------------------------------------------------------------------------
 
 

@@ -3,11 +3,11 @@
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 19 de Septiembre 2013
+% Fecha: 02 de Octubre 2013
 % 
-% Tarea No:1
+% Tarea No:2
 % 
-% Titulo: Leer un archivo BMP con color indexado de 8-bits
+% Titulo: Practica 2.1: Seguimiento de contornos
 % 
 % ------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ clear all; clc; close all; %Limpia todo antes de empezar
 
 
 
-i1 = fopen('new2.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
+i1 = fopen('b.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
 if(i1~=-1)
     
     [Isalida,flag]=readbmp(i1);%llama a la funcion readbmp, le pasa el valor si encuentra los archivo

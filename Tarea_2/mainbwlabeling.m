@@ -3,11 +3,11 @@
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 19 de Septiembre 2013
+% Fecha: 02 de Octubre 2013
 % 
-% Tarea No:2
+% Tarea No:2.2
 % 
-% Titulo: Leer un archivo BMP con color indexado de 8-bits
+% Titulo: Etiquetado de regiones conexas
 % 
 % ------------------------------------------------------------------------
 
@@ -21,16 +21,16 @@ if(i1~=-1)
     
     [Isalida,flag]=readbmp(i1);%llama a la funcion readbmp, le pasa el valor si encuentra los archivo
    
-    Salida=bwlabeling(Isalida);
+    Salida=bwlabeling(Isalida);%LLama a la funcion para el etiquetado
     
     Salida=label2rgb(Salida);
     if(flag~=0)
         
-        figure('Name','Practica 1: Leer un archivo BMP con color indexado de 8-bits');
+        figure('Name','Practica 2: Etiquetado de regiones conexas');
         subplot(1,2,1); imshow(Isalida,[]); % Muestra la Imagen 1
-        title('BMP de 8 bits a color') 
+        title('Imagen original') 
         subplot(1,2,2); imshow(Salida,[]); % Muestra la imagen 2
-        title('BMP de 8 bits a escala de grises') 
+        title('Imagen Etiquetada por regiones') %se usa para visualizar en colores los objetos etiquetados 
         fclose(i1);
         
    
