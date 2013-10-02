@@ -5,7 +5,7 @@
 % 
 % Fecha: 19 de Septiembre 2013
 % 
-% Tarea No:1
+% Tarea No:2
 % 
 % Titulo: Leer un archivo BMP con color indexado de 8-bits
 % 

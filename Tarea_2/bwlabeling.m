@@ -73,8 +73,3 @@ for i = 2:length(idx)
         ind = Salida==idx(i);
         Salida(ind)=clases(i-1);
 end
-
-
-
-
-

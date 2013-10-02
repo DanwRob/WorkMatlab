@@ -16,18 +16,18 @@ clear all; clc; close all; %Limpia todo antes de empezar
 
 
 
-i1 = fopen('new4.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
+i1 = fopen('new2.bmp','r');% Se abre la imagen con fopen y con permisos de lectura
 if(i1~=-1)
     
     [Isalida,flag]=readbmp(i1);%llama a la funcion readbmp, le pasa el valor si encuentra los archivo
-    Salida=bwedge(Isalida);
+    Salida=bwedge(Isalida); % se pasa la imagen al metodo para detectar bordes
     if(flag~=0)
         
-        figure('Name','Practica 1: Leer un archivo BMP con color indexado de 8-bits');
+        figure('Name','Practica 2.1: Seguimiento de contornos');
         subplot(1,2,1); imshow(Isalida,[]); % Muestra la Imagen 1
-        title('BMP de 8 bits a color') 
+        title('Imagen original') 
         subplot(1,2,2); imshow(Salida,[]); % Muestra la imagen 2
-        title('BMP de 8 bits a escala de grises') 
+        title('Seguimiento de contorno con 4 adyaciencia') 
         fclose(i1);
         
    

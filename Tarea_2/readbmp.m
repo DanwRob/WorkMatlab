@@ -4,7 +4,7 @@
 %
 % Dan Williams Robledo Cruz
 % 
-% 19 de Septiembre 2013
+% 01 de Octubre 2013
 % 
 % Tarea #1
 % 

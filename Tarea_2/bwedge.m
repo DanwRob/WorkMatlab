@@ -8,14 +8,14 @@ for i = 1:y
             
 end
 
-Salida = zeros(y,x);%Se crea una Matriz de ceros
+Salida = zeros(y,x);            %Se crea una Matriz de ceros para la salida de la imagen
 
 
-idx = unique(I(:));
+idx = unique(I(:))              % se extrae los indices para identificar las etiquetas iguales
 for h = 2:length(idx)
-    M_temp=zeros(y,x);
-        ind = I==idx(h);
-        temp(ind)=255;
+    M_temp=zeros(y,x);          %Se crea una Matriz de ceros temporal para ir añadiendo los contornos encontrados
+        ind = I==idx(h)         %se calcula la posicion del primer objeto
+        temp(ind)=255;              
         
         d=1;
         flag=0;

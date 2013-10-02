@@ -3,7 +3,7 @@
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 19 de Septiembre 2013
+% Fecha: 01 de Octubre 2013
 % 
 % Tarea No:1
 % 
@@ -21,7 +21,7 @@ if(i1~=-1)
     
     [Isalida,flag]=readbmp(i1);%llama a la funcion readbmp, le pasa el valor si encuentra los archivo
    
-    Salida=bwlabeling(Isalida);
+    Salida=bwlabeling(Isalida);% Se 
     Salida2=bwedge(Salida);
     
     if(flag~=0)
