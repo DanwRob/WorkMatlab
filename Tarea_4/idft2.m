@@ -1,21 +1,17 @@
-function Isalida=idft2(img)
-    [y,x]=size(img);
-    temp=zeros(y,x);
-  
+function img=idft2(img)
+    [Y,X]=size(img);
 
-    for j=1:y
-       temp(j,:)=idft(img(j,:));
+    for x=1:Y
+       img(x,:)=idft(img(x,:));     %Trasformas las filas aplicando la DFT 1D
    
     end
     
-    temp=temp.';
+    img=img.';                      %se aplica la inversa a la matriz para tranformar las colunmas
   
-    for j=1:x
+    for x=1:X
    
-     temp3(j,:)=idft(temp(j,:));
+     img(x,:)=idft(img(x,:));       %se aplica la inversa a la matriz para tranformar las colunmas
     
     end
-    temp3=temp3.';
-   
-   
-Isalida=temp3;
+    img=img.';                       %se regresa la matriz a su posicion original
+

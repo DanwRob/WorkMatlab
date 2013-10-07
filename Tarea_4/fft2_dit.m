@@ -1,30 +1,24 @@
-function Isalida=fft2_dit(img)
-    [y,x]=size(img);
-    temp=zeros(y,x);
+function img=fft2_dit(img)
+    [Y,X]=size(img);
 
-    temp2=zeros(y,x);
-    N1=x/2;
-    N2=y/2;
-    for l=1:y
-       
-        temp2(l,:)=img(l,:).*exp(((i*2*pi.*(((1:x).*N1)/x+(l*N2/y)))));
+    N1=X/2;
+    N2=Y/2;
+    W=1j*2*pi;
+    for x=1:Y
+        img(x,:)=img(x,:).*exp(((W.*(((1:X).*N1)/X+(x*N2/Y)))));    %translada el centro de la imagen
+    end
+   
+    img=img.';                              %se aplica la inversa a la matriz para tranformar las colunmas
+    for x=1:X
+     img(x,:)=fft_dit(img(x,:));            %Trasformas las columnas aplicando la FFT 1D
+     img(x,:)=bitreversal(img(x,:));
+    end
+    img=img.';                              %se regresa la matriz a su posicion original
+    
+    for x=1:Y
+       img(x,:)=fft_dit(img(x,:));          %Trasformas las filas aplicando la FFT 1D
+       img(x,:)=bitreversal(img(x,:));
     end
 
-    for j=1:y
-       temp(j,:)=fft_dit(temp2(j,:));
-   
-    end
-    
-    temp=temp.';
-  
-    for j=1:x
-   
-     temp3(j,:)=fft_dit(temp(j,:));
-    
-    end
-    temp3=temp3.';
-    
-   
-Isalida=temp3;
 
 

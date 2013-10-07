@@ -11,6 +11,7 @@
 % 
 % ------------------------------------------------------------------------
 
+
 clear all; clc; close all; %Limpia todo antes de empezar
 
 
@@ -24,26 +25,22 @@ if(i1~=-1)
    
        [Y,X]=size(Isalida);
        Isalida=double(Isalida);
-       
-       Img_pd=checkpow2(Isalida);   %Comprueba si la imagen sea de tamaño 2, sino le añade un padding
        tic
-       m_fft2=fft2_dit(Img_pd);     %Manda a llamar la funcion fft2_dit
+       m_dft2= dft2(Isalida);               %Llama a la funcion dft2
        toc
-       ifft2=ifft2_dit(m_fft2);     %Manda a llamar la funcion ifft2_dit
-       m_fft2=(log(1+abs(m_fft2))); %convierte a un rango de espctro visible la dft
-       
-       ifft2=abs(ifft2((1:Y),(1:X)));   %Le quita el padding a la imagen
+       m_idft2=abs(idft2(m_dft2));                %Llama a la funcion idft2
+
+       m_dft2=(log(1+abs(m_dft2)));          %Conveirte a un rango de espctro visible la dft
        
         figure('Name','Practica 4');
         subplot(2,2,1:2); imshow(Isalida,[]); % Muestra la Imagen original
         title('Imagen original')
-        subplot(2,2,3); imshow(m_fft2,[]); % Muestra la Imagen
-        title('Espectro de frecuencias de la FFT') 
-        subplot(2,2,4); imshow(ifft2,[]); % Muestra la Imagen inversa de fft
-        title('Inversa de la FFT') 
+        subplot(2,2,3); imshow(m_dft2,[]); % Muestra la Imagen
+        title('Espectro de frecuencias de la DFT') 
+        subplot(2,2,4); imshow( m_idft2,[]); % Muestra la Imagen inversa de dft
+        title('Inversa de la DFT') 
         
         fclose(i1);
-        
    
     end
    
