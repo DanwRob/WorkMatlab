@@ -16,7 +16,7 @@ clear all; clc; close all; %Limpia todo antes de empezar
 
 
 
-i1 = fopen('MRI.bmp','r');         % Se abre la imagen con fopen y con permisos de lectura
+i1 = fopen('freqs.bmp','r');         % Se abre la imagen con fopen y con permisos de lectura
 
 if(i1~=-1)
        
