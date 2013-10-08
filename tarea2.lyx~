@@ -1,0 +1,1110 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish-mexico
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Tarea #2: Fundamentos de la imagen digital
+\end_layout
+
+\begin_layout Author
+Dan Williams Robledo Cruz
+\end_layout
+
+\begin_layout Date
+02 de octubre del 2013
+\end_layout
+
+\begin_layout Address
+Procesamiento Digital de Imágenes
+\end_layout
+
+\begin_layout Right Address
+Cinvestav
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Paragraph
+La conectividad es un concepto muy importante para poder delimitar los limites
+ de los objetos en regiones dentro de una imagen digital.
+\end_layout
+
+\begin_layout Paragraph
+Para decir que 2 pixeles están conectados entre si se debe cumplir que sean
+ adyacentes en algún sentido(8 o 4 adyacencia) y que sus niveles de grises
+ sean iguales, y así poder sacar el contorno de algún objeto presente en
+ la imagen, para poder detectar múltiples objetos se usa el etiquetado seguido
+ de la detección de contorno.
+\end_layout
+
+\begin_layout Paragraph
+Es esta practica se vera cada una de los pasos para detección de contornos
+ de uno o mas objetos en una imagen.
+\end_layout
+
+\begin_layout Section
+Desarrollo
+\end_layout
+
+\begin_layout Subsection
+Descripción de la practica
+\end_layout
+
+\begin_layout Enumerate
+Hacer una función en Matlab para la decteccion de contorno de una imagen
+ binaria usando 4-adyacencia.
+\end_layout
+
+\begin_layout Enumerate
+Hacer una función en Matlab para el etiquetado de las regiones conexas disjuntas
+ de una imagen binaria.
+\end_layout
+
+\begin_layout Enumerate
+Realizar el seguimiento de múltiples contornos en una imagen binaria.
+\end_layout
+
+\begin_layout Subsection
+Seguimiento de contorno con 4 adyacencia
+\end_layout
+
+\begin_layout Paragraph
+Su algoritmo es el siguiente
+\end_layout
+
+\begin_layout Enumerate
+Se busca el primer pixel P
+\begin_inset Formula ${\scriptstyle 0}$
+\end_inset
+
+ de la región conexa a partir de la esquina superior izquierda.
+\end_layout
+
+\begin_layout Enumerate
+Se define una variable d que almacena la dirección del recorrido del pixel.
+ d=1.
+\end_layout
+
+\begin_layout Enumerate
+Calcular N
+\begin_inset Formula ${\scriptstyle 4}$
+\end_inset
+
+ alrededor del pixel actual P
+\begin_inset Formula ${\scriptstyle i}$
+\end_inset
+
+ el inicio de la búsqueda es en la posición actual es q=(d+3) mod 4.
+\end_layout
+
+\begin_layout Enumerate
+A partir de q buscar en sentido del reloj el primer pixel con valor 1 para
+ determinar el nuevo elemento del contorno P
+\begin_inset Formula ${\scriptstyle i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Actualizar la dirección del recorrido d al el pixel actual.
+\end_layout
+
+\begin_layout Enumerate
+Si el píxel actual P
+\begin_inset Formula ${\scriptstyle i}$
+\end_inset
+
+ es igual al segundo elemento del borde P
+\begin_inset Formula ${\scriptstyle 1}$
+\end_inset
+
+ y si el elemento previo P
+\begin_inset Formula ${\scriptstyle i-1}$
+\end_inset
+
+ es igual al punto inicial del borde P
+\begin_inset Formula ${\scriptstyle 0}$
+\end_inset
+
+ entonces terminar el algoritmo sino regresar al paso 1.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename uno.PNG
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Seguimiento de contornos 4 adyacencia
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Se empieza a buscar los pixeles adyacentes y se guarda en una matriz temporal
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	q =mod ((d+3),4);  
+\end_layout
+
+\begin_layout Plain Layout
+
+	switch(q)                                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 3                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(temp(a+1,b)~=0)%3                                                  
+      
+\end_layout
+
+\begin_layout Plain Layout
+
+	a=a+1;                                        
+\end_layout
+
+\begin_layout Plain Layout
+
+	M_temp(a-1,b-1)=temp(a,b); %se guarda el pixel encontrado
+\end_layout
+
+\begin_layout Plain Layout
+
+	p=[p [a ;b]];                                        
+\end_layout
+
+\begin_layout Plain Layout
+
+	d=3;     
+\end_layout
+
+\begin_layout Plain Layout
+
+	else                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	d=1;                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 0                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(temp(a,b-1)~=0)%0
+\end_layout
+
+\begin_layout Plain Layout
+
+	b=b-1;
+\end_layout
+
+\begin_layout Plain Layout
+
+	M_temp(a-1,b-1)=temp(a,b);
+\end_layout
+
+\begin_layout Plain Layout
+
+	p=[p [a ;b]];
+\end_layout
+
+\begin_layout Plain Layout
+
+	d=0;    
+\end_layout
+
+\begin_layout Plain Layout
+
+	else                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	d=2;                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\begin_layout Plain Layout
+
+	                                
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 1                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(temp(a-1,b)~=0)%1                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	a=a-1;                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	M_temp(a-1,b-1)=temp(a,b);              
+\end_layout
+
+\begin_layout Plain Layout
+
+	p=[p,[a ;b]];                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	d=1;                                
+\end_layout
+
+\begin_layout Plain Layout
+
+	else                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	d=3;                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+	end  
+\end_layout
+
+\begin_layout Plain Layout
+
+	                              
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 2                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(temp(a,b+1)~=0)%2                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	b=b+1;                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	M_temp(a-1,b-1)=temp(a,b);               
+\end_layout
+
+\begin_layout Plain Layout
+
+	p=[p,[a ;b]];                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	d=2;                                
+\end_layout
+
+\begin_layout Plain Layout
+
+	else                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+	d=0;                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+	end        
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Si el píxel actual P
+\begin_inset Formula ${\scriptstyle i}$
+\end_inset
+
+ es igual al segundo elemento del borde P
+\begin_inset Formula ${\scriptstyle 1}$
+\end_inset
+
+ y si el elemento previo P
+\begin_inset Formula ${\scriptstyle i-1}$
+\end_inset
+
+ es igual al punto inicial del borde P
+\begin_inset Formula ${\scriptstyle 0}$
+\end_inset
+
+ entonces terminar
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	if(p(:,end-1)==p(:,1) )                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(p(:,end)==p(:,2))                                         
+\end_layout
+
+\begin_layout Plain Layout
+
+		flag=1;                                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		end                                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Etiquetado de regiones conexas
+\end_layout
+
+\begin_layout Paragraph
+El etiquetado consiste en asignar que identifique las distintas regiones
+ disjuntas de una imagen, es muy usado en imágenes binarias para identificar
+ los diferentes objetos en la imagen.
+\end_layout
+
+\begin_layout Paragraph
+El algoritmo clásico de etiquetado consta de 3 pasos.
+\end_layout
+
+\begin_layout Enumerate
+Propagación de las etiquetas.
+\end_layout
+
+\begin_layout Enumerate
+Resolver tablas de equivalencias
+\end_layout
+
+\begin_layout Enumerate
+Asignación de etiquetas usando clases de equivalencia.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename dos.PNG
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Algoritmo clásico de propagacion de etiquetas para 4-conectividad
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Propagación de las etiquetas
+\end_layout
+
+\begin_layout Paragraph
+Se empieza a analizar el pixel actual si este es igual a 0 se pasa a analizar
+ el siguiente pixel, si es igual a 1 se comprueba si su pixel superior e
+ izquierdo es igual a 0, si cumple la condición se asigna una etiqueta y
+ se incrementa el numero de etiquetas mas 1.
+\end_layout
+
+\begin_layout Paragraph
+Si la condición anterior no se cumple se analiza si su pixel superior e
+ izquierdo son diferentes y diferentes de 0, si la condición se cumple se
+ añade a la tabla de equivalencia la relación entre el pixel superior e
+ izquierdo y se pone la etiqueta del pixel izquierdo.
+\end_layout
+
+\begin_layout Paragraph
+Si el pixel izquierdo es diferente de 0 se añade la etiqueta del pixel izquierdo
+ a pixel actual
+\end_layout
+
+\begin_layout Paragraph
+Si el pixel superior es diferente de 0 se añade la etiqueta del pixel superior
+ a pixel actual.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	lx=I(i,j);             
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(lx~=0)                             
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(I(i,j-1)==0&&I(i-1,j)==0)       
+\end_layout
+
+\begin_layout Plain Layout
+
+		Ne=Ne+1;                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		lx=Ne;                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		I(i,j)=lx;                                      
+\end_layout
+
+\begin_layout Plain Layout
+
+		elseif(I(i,j-1)~=I(i-1,j)&&I(i,j-1)~=0&&I(i-1,j)~=0) 
+\end_layout
+
+\begin_layout Plain Layout
+
+		tabla=[tabla;I(i-1,j),I(i,j-1)];        
+\end_layout
+
+\begin_layout Plain Layout
+
+		lx=I(i,j-1);                                                 
+\end_layout
+
+\begin_layout Plain Layout
+
+		I(i,j)=lx;                                             
+\end_layout
+
+\begin_layout Plain Layout
+
+		elseif(I(i,j-1)~=0)                         
+\end_layout
+
+\begin_layout Plain Layout
+
+		lx=I(i,j-1);                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		I(i,j)=lx;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+		elseif(I(i-1,j)~=0) 
+\end_layout
+
+\begin_layout Plain Layout
+
+		lx=I(i-1,j);                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		I(i,j)=lx;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+		end                                              
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Resolver tabla de equivalencias
+\end_layout
+
+\begin_layout Standard
+A partir de los pares de la tabla de equivalencias generar la matriz binaria
+ B y se convierte en reflexiva y simétrica .
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	b=eye(length(clases));              
+\end_layout
+
+\begin_layout Plain Layout
+
+	aux=length(tabla(:,1));
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i=2:aux     
+\end_layout
+
+\begin_layout Plain Layout
+
+		b(tabla(i,1),tabla(i,2))=1;         
+\end_layout
+
+\begin_layout Plain Layout
+
+		b(tabla(i,2),tabla(i,1))=1; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\end_inset
+
+Se resuelve resuelve la tabla de equivalencia con el algoritmo de Warshall.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Bm=zeros(length(clases));            
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i=1:length(clases)     
+\end_layout
+
+\begin_layout Plain Layout
+
+		for j=1:length(clases)         
+\end_layout
+
+\begin_layout Plain Layout
+
+			if(b(i,j)==1)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			for k=1:length(clases)                                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				Bm(i,k)=b(i,k)|b(k,j);                             
+\end_layout
+
+\begin_layout Plain Layout
+
+			end         
+\end_layout
+
+\begin_layout Plain Layout
+
+			end     
+\end_layout
+
+\begin_layout Plain Layout
+
+		end 
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Asignación de etiquetas usando clases de equivalencias
+\end_layout
+
+\begin_layout Standard
+A partir de Bm se determinan las clases de equivalencias y se sustituyen
+ las etiquetas equivalentes en la matriz de salida de la imagen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	for i=1:length(clases)     
+\end_layout
+
+\begin_layout Plain Layout
+
+		for j=1:length(clases)         
+\end_layout
+
+\begin_layout Plain Layout
+
+			if(Bm(i,j)==1)         
+\end_layout
+
+\begin_layout Plain Layout
+
+				clases(j)=clases(i);      
+\end_layout
+
+\begin_layout Plain Layout
+
+			end     
+\end_layout
+
+\begin_layout Plain Layout
+
+		end 
+\end_layout
+
+\begin_layout Plain Layout
+
+	end 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	idx = unique(Salida(:)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i = 2:length(idx)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		ind = Salida==idx(i);         
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida(ind)=clases(i-1);        
+\end_layout
+
+\begin_layout Plain Layout
+
+	end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Resultados: Realización del seguimiento de múltiples contornos en una imagen
+ binaria.
+\end_layout
+
+\begin_layout Paragraph
+Esta practica se concluye usando los métodos de etiquetado de regiones conexas
+ combinado con el de detección de bordes, para poder localizar múltiples
+ objetos en una imagen binaria.
+\end_layout
+
+\begin_layout Paragraph
+El argumento de entrada es la imagen binaria de los objetos y el argumento
+ de salida es la imagen binaria del contorno de los objetos.
+\end_layout
+
+\begin_layout Enumerate
+Se lee la imagen binaria con la función 'readbmp'.
+\end_layout
+
+\begin_layout Enumerate
+Se pasa la imagen leída a la función 'bwlabeling' para hacerle el etiquetado.
+\end_layout
+
+\begin_layout Enumerate
+Después de etiquetar la imagen se pasa a la función 'bwedge' para detectar
+ los bordes de los objetos uno a uno, guiándose por el etiquetado de cada
+ objeto.
+\end_layout
+
+\begin_layout Enumerate
+Se manda a imprimir las imágenes resultantes para ver los resultados
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+i1 = fopen('bw1.bmp','r');         
+\end_layout
+
+\begin_layout Plain Layout
+
+if(i1~=-1)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	[Isalida,flag]=readbmp(i1);        
+\end_layout
+
+\begin_layout Plain Layout
+
+	Salida=bwlabeling(Isalida);          
+\end_layout
+
+\begin_layout Plain Layout
+
+	Salida2=bwedge(Salida);            
+\end_layout
+
+\begin_layout Plain Layout
+
+	Salida=label2rgb(Salida);     
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(flag~=0)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		figure('Name','Practica 2.3: Seguimiento del contorno de objetos múltiples');
+         
+\end_layout
+
+\begin_layout Plain Layout
+
+		subplot(2,2,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+		imshow(Isalida,[]); % Muestra la Imagen 1         
+\end_layout
+
+\begin_layout Plain Layout
+
+		title('Imagen original')          
+\end_layout
+
+\begin_layout Plain Layout
+
+		subplot(2,2,3); 
+\end_layout
+
+\begin_layout Plain Layout
+
+		imshow(Salida,[]); % Muestra la imagen 2         
+\end_layout
+
+\begin_layout Plain Layout
+
+		title('Imagen Etiquetada por regiones')          
+\end_layout
+
+\begin_layout Plain Layout
+
+		subplot(2,2,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+		imshow(Salida2,[]); % Muestra la imagen 2         
+\end_layout
+
+\begin_layout Plain Layout
+
+		title('Contorno de objetos múltiples')          
+\end_layout
+
+\begin_layout Plain Layout
+
+		fclose(i1);     
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename tres.PNG
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Resultado después de aplicar el metodo de etiquetado y deteccion de bordes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-1"
+
+\end_inset
+
+Wilfrido Gómez Flores--------------------------------------Clase03a_PDI_2013.pdf
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-2"
+
+\end_inset
+
+Wilfrido Gómez Flores---------------------------------------Clase03b_PDI_2013.pdf
+\end_layout
+
+\end_body
+\end_document
