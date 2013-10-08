@@ -3,7 +3,7 @@
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 02 de Octubre 2013
+% Fecha: 08 de Octubre 2013
 % 
 % Tarea No:4
 % 
@@ -25,7 +25,7 @@ if(i1~=-1)
        [Y,X]=size(Isalida);
        Isalida=double(Isalida);
        
-       Img_pd=checkpow2(Isalida);   %Comprueba si la imagen sea de tamaño 2, sino le añade un padding
+       Img_pd=checkpow2(Isalida);   %Comprueba si la imagen sea de tamaño 2n, sino le añade un padding
        tic
        m_fft2=fft2_dit(Img_pd);     %Manda a llamar la funcion fft2_dit
        toc

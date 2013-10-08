@@ -792,7 +792,7 @@ key "key-2"
 \end_layout
 
 \begin_layout Standard
-Se lee la imagen a procesar, se llama la función "checkpow2" comprueba que
+Se lee la imagen a procesar, se llama la funcion "checkpow2" comprueba que
  la imagen sea 2
 \begin_inset Formula $^{n}$
 \end_inset

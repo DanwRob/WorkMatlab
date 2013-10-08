@@ -1,17 +1,16 @@
 % ------------------------------------------------------------------------
-% --------- P R O C E S A M I E N T O   D E   I M A G E N E S ------------
-% ------------------------------------------------------------------------
+% Materia: Procesamiento Digital de Imagenes
 %
-% Dan Williams Robledo Cruz
+% Nombre: Dan Williams Robledo Cruz
 % 
-% 19 de Septiembre 2013
+% Fecha: 08 de Octubre 2013
 % 
-% Tarea #1
+% Tarea No:4
 % 
-% Leer un archivo BMP con color indexado de 8-bits
+% Titulo: Transformada de Fourier Directa y Rapida
 % 
-%
 % ------------------------------------------------------------------------
+
 
 
 function [Isalida,flag]= readbmp(img)% la función se llama readbmp

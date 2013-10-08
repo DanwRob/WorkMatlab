@@ -3,7 +3,7 @@
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 02 de Octubre 2013
+% Fecha: 08 de Octubre 2013
 % 
 % Tarea No:4
 % 
@@ -16,7 +16,7 @@ clear all; clc; close all; %Limpia todo antes de empezar
 
 
 
-i1 = fopen('freqs.bmp','r');         % Se abre la imagen con fopen y con permisos de lectura
+i1 = fopen('huella.bmp','r');         % Se abre la imagen con fopen y con permisos de lectura
 
 if(i1~=-1)
        

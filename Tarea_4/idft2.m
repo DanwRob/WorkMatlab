@@ -1,3 +1,16 @@
+% ------------------------------------------------------------------------
+% Materia: Procesamiento Digital de Imagenes
+%
+% Nombre: Dan Williams Robledo Cruz
+% 
+% Fecha: 08 de Octubre 2013
+% 
+% Tarea No:4
+% 
+% Titulo: Transformada de Fourier Directa y Rapida
+% 
+% ------------------------------------------------------------------------
+
 function img=idft2(img)
     [Y,X]=size(img);
 
