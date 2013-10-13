@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Title
-Tarea #2: Transformada Discreta de Fourier
+Tarea #2: Transformaciones de intesidad
 \end_layout
 
 \begin_layout Author
@@ -85,30 +85,20 @@ Introducción
 \end_layout
 
 \begin_layout Standard
-La transformada de Fourier es una herramienta que nos permite pasar del
- domino espacial al dominio de la frecuencia esto ayuda mucho para el Procesamie
-nto digital de imágenes, ya que podemos aplicar determinadas operaciones
- para obtener información en especifica, entre alguna de las operaciones
- están:
-\end_layout
-
-\begin_layout Enumerate
-Eliminar altas frecuencias.
-\end_layout
-
-\begin_layout Enumerate
-Compresión y transmisión de imágenes.
-\end_layout
-
-\begin_layout Enumerate
-Extraer características de texturas.
+El principal objetivo de las tecnicas de mejoramiento es el proceso de manipulac
+ion de una imagen para que resulte mas util que la imagen original para
+ una aplicacion determinada.
 \end_layout
 
 \begin_layout Standard
-Esta practica tiene como finalidad presentar como transformar una imagen
- en el dominio espacial al dominio de la frecuencia y viceversa, implementando
- la Transformada Discreta de Fourier (DFT) y Transformada Rápida de Fourier
- (FFT) y la inversa de ambas.
+El mejoramiento de imagenes puede efectuarse en el dominio espacial o en
+ el dominio de la frecuencia.
+\end_layout
+
+\begin_layout Standard
+La presente practica se veran metodos en el dominio espacial, el cual se
+ refiere al conjunto de pixeles que componen la imagen y las tecnicas operan
+ directamente sobre ellos.
 \end_layout
 
 \begin_layout Section
@@ -120,50 +110,22 @@ Descripción de la practica
 \end_layout
 
 \begin_layout Subsubsection
-Hacer un programa principal para la DFT que realice lo siguiente:
+Implementar en Matlab que compute las transformaciones de intensidad: lineal,
+ negativo, comprension logaritmica, gamma y normalizacion.
 \end_layout
 
 \begin_layout Enumerate
-Realizar la DFT directa con el espectro de frecuencia trasladado al centro.
+La imagen tendra tres argumentos de entrada: la imagen en escala de grises,
+ una cadena de caracteres que indique el procedimiento a realizar y los
+ valores de la trasformacion.
 \end_layout
 
 \begin_layout Enumerate
-Inversa DFT.
-\end_layout
-
-\begin_layout Enumerate
-Desplegar en una sola venta las imágenes: Original, Espectro de frecuencias
- e Inversa de DFT.
-\end_layout
-
-\begin_layout Subsubsection
-Hacer un programa principal para la FFT que realice lo siguiente
-\end_layout
-
-\begin_layout Enumerate
-Tiene que verificar que la imagen sea de tamaño 2
-\begin_inset Formula $^{n}$
-\end_inset
-
- y llenar con padding de ceros en caso contrario.
-\end_layout
-
-\begin_layout Enumerate
-Realice la FFT directa con el espectro de frecuencias trasladado al centro
- de la imagen.
-\end_layout
-
-\begin_layout Enumerate
-La inversa de la FFT.
-\end_layout
-
-\begin_layout Enumerate
-Desplegar en una sola venta las imágenes: Original, Espectro de frecuencias
- e Inversa de DFT.
+La salida sera la imagen trasformada dependiendo del caso seleccionado.
 \end_layout
 
 \begin_layout Subsection
-DFT
+Lineal
 \end_layout
 
 \begin_layout Standard

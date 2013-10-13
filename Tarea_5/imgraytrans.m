@@ -3,46 +3,52 @@
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 30 de Septiembre 2013
+% Fecha: 14 de octubre 2013
 % 
-% Tarea No:3
+% Tarea No:5
 % 
-% Titulo: Transformaciones Geometricas
+% Titulo: Transformaciones de intesidad
 % 
 % ------------------------------------------------------------------------
 
-function Salida=imgraytrans(img,Trans,valores)% la función se llama geomtrans\
+function Salida=imgraytrans(img,Trans,valores)% la función se llama imgraytrans
 
+
+ if length(valores)==1 || isempty(valores)==0
+
+ v=str2num(valores{1});                          %se obtienen los valores de la transformación
+ v=double(v);
  
- 
-        if strcmp(Trans,'lin')==1
-           v=str2num(valores{1})%Traslacion     
-           Salida=v(1).*img+v(1);
-        elseif strcmp(Trans,'neg')==1      %Escalado
+        if strcmp(Trans,'lin')==1 && length(v)==2  %lineal
+           Salida=v(1).*img+v(2);
+        elseif strcmp(Trans,'neg')==1 && isempty(valores)==0 %negativo
            Salida=255-img;
-        elseif strcmp(Trans,'log')==1
-             rmax=255;
-             v=str2num(valores{1});
-             c=255/log(1+rmax)
-             Salida=c.*log(1+(exp(v)-1).*img);
+        elseif strcmp(Trans,'log')==1 && length(v)==1 
+             rmax=max(max(img));                        %se obtiene rmax
+             c=255/log(1+rmax)                          %constante c
+             Salida=c.*log(1+(exp(v)-1).*img); 
             
-        elseif strcmp(Trans,'exp')==1
-       
-             rmax=max(max(img));
-             v=str2num(valores{1});
-             c=255/log(1+rmax)
-             Salida=c.*(((1+v).^img)-1);
-             
-         elseif strcmp(Trans,'gamma')==1
-             rmax=max(max(img));
-             v=str2num(valores{1});
+        elseif strcmp(Trans,'exp')==1 && length(v)==1
+            rmax=max(max(img));
              c=255/log(1+rmax);
+             Salida=c.*(((1+img).^v)-1);
+             
+         elseif strcmp(Trans,'gamma')==1 && length(v)==2     %Gamma
+             Salida=v(1).*img.^v(2);
              
              
-         elseif strcmp(Trans,'norm')==1
-              Salida=4
+         elseif strcmp(Trans,'norm')==1 && isempty(valores)==0  %Normalizacion
+             fmax=max(max(img));                          %fmax
+             fmin=min(min(img));                          %fmin
+             Salida=255.*((img-fmin)./(fmax-fmin));
         else
-            disp('Error oopcion incorrecta');
+            disp('Error opcion incorrecta revisar los datos de entrada');
             Salida=1;
         end
+        
+ else
+   disp('Error opcion incorrecta revisar los datos de entrada');
+   Salida=1;
+   
+ end
         
