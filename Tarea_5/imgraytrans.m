@@ -21,26 +21,23 @@ function Salida=imgraytrans(img,Trans,valores)% la función se llama imgraytrans
  
         if strcmp(Trans,'lin')==1 && length(v)==2  %lineal
            Salida=v(1).*img+v(2);
+            Salida= uint8(Salida);
         elseif strcmp(Trans,'neg')==1 && isempty(valores)==0 %negativo
            Salida=255-img;
+            Salida= uint8(Salida);
         elseif strcmp(Trans,'log')==1 && length(v)==1 
              rmax=max(max(img));                        %se obtiene rmax
-             c=255/log(1+rmax)                          %constante c
+             c=255/log(1+rmax);                          %constante c
              Salida=c.*log(1+(exp(v)-1).*img); 
-            
-        elseif strcmp(Trans,'exp')==1 && length(v)==1
-            rmax=max(max(img));
-             c=255/log(1+rmax);
-             Salida=c.*(((1+img).^v)-1);
-             
+             Salida= mat2gray(Salida);
          elseif strcmp(Trans,'gamma')==1 && length(v)==2     %Gamma
-             Salida=v(1).*img.^v(2);
-             
-             
+             Salida=1.*img.^v(2);
+             Salida= mat2gray(Salida);
          elseif strcmp(Trans,'norm')==1 && isempty(valores)==0  %Normalizacion
              fmax=max(max(img));                          %fmax
              fmin=min(min(img));                          %fmin
              Salida=255.*((img-fmin)./(fmax-fmin));
+             Salida= mat2gray(Salida);
         else
             disp('Error opcion incorrecta revisar los datos de entrada');
             Salida=1;
