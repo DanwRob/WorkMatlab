@@ -1,40 +1,34 @@
-
 % ------------------------------------------------------------------------
 % Materia: Procesamiento Digital de Imagenes
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 14 de octubre 2013
+% Fecha: 16 de octubre 2013
 % 
 % Tarea No:6
 % 
-% Titulo: Transformaciones de intesidad
+% Titulo: Ecualización global del histograma
 % 
 % ------------------------------------------------------------------------
 
-function Salida=histequal(img)% la función se llama imgraytrans
+function [Salida,cdf]=histequal(img)% la función se llama histequal
 
-h=imhistogram(img);
-figure;
-bar(0: 255, h);
-axis([0 255 0 max(h)])
-
+h=imhistogram(img);             %Se calcula el histograma con la funcion imhistogram
 N=numel(img);
-pdf=h.*N^-1;
+pdf=h.*N^-1;                    %Calculo de la PDF multiplicando el histograma por el numero de pixeles elevado -1
 
 for k=1:length(pdf)
-
-cdf(k)=255*sum(pdf(1:k));
+cdf(k)=256*sum(pdf(1:k));       %calculo de la CDF (Funcion de Distribucion Acomulada)
 end
 
 
 idx=unique(img);
 Salida=zeros(size(img));
 for i = 1:length(idx)
-        ind = find(img==idx(i));
+        ind = img==idx(i);         %se sustituyen los nuevos valores de grises en la imagen original
     Salida(ind)=cdf(idx(i)+1);
 end 
-
+Salida=uint8(Salida);
 
 
 
