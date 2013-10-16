@@ -12,3 +12,15 @@
 % ------------------------------------------------------------------------
 
 function Salida=imhistogram(img)% la función se llama imgraytrans
+
+idx=unique(img);
+Salida=zeros(1, 256);
+
+for i = 1:length(idx)
+        ind = find(img==idx(i));
+     Salida(idx(i)+1)=length(ind);
+end 
+
+
+
+        

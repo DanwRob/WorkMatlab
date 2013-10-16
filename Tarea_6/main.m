@@ -17,10 +17,13 @@ clear all; clc; close all; %Limpia todo antes de empezar
 %Transformacion lineal
 
     
-    img=double(imread('new.bmp'));   %Se lee la imagen y se transforma a double
+img=double(imread('einstein.tif'));   %Se lee la imagen y se transforma a double
    
-    Salida=histequal(img);
 
+
+Salida=histequal(img);
+imshow(uint8(Salida));
 figure;
-bar(Salida);
-axis([0 256 0 max(Salida)])
+
+bar(0: 255, Salida);
+axis([0 255 0 max(Salida)])
