@@ -3,68 +3,54 @@
 %
 % Nombre: Dan Williams Robledo Cruz
 % 
-% Fecha: 16 de octubre 2013
+% Fecha: 10 de noviembre 2013
 % 
-% Tarea No:6
+% Tarea No:7
 % 
-% Titulo: Ecualización global del histograma
+% Titulo: Tipos de Ruido
 % 
 % ------------------------------------------------------------------------
 
 
 clear all; clc; close all; %Limpia todo antes de empezar
 
-a=0;
-b=0.3;
+
 img = imread('cameraman.tif');
+I=mat2gray(img);   
 
-uniforme =mat2gray(img);
-U = rand(size(img));
-z=(a+(b-a))*U;
-
+Resultado=imnoises(I,'uniform',0,0.5);
 figure
-imshow(uniforme+(z))
+imshow(Resultado)
+title('uniforme')
 
-
-a=0;
-b=0.1;
-N = randn(size(img));
-z=a+(b-a)*N;
-
+Resultado=imnoises(I,'gaussian',0,0.3);
 figure
-imshow(uniforme+z)
+imshow(Resultado)
+title('gausiano')
 
-
-
-a=0;
-b=0.1;
-N = randn(size(img));
-
-z = exp(b*N + a);
-z=mat2gray(uniforme+z);
+Resultado=imnoises(I,'lognormal',0,0.1);
 figure
-imshow(z)
+imshow(Resultado)
+title('lognormal')
 
-
-a=0;
-b=0.1;
-U = rand(size(img));
-z = a+sqrt(-b*log(1-U));
+Resultado=imnoises(I,'rayleigh',0,0.1);
 figure
-imshow(uniforme+z)
+imshow(Resultado)
+title('raylengt')
 
-
-a=5;
-U = rand(size(img));
-z = (-1/a)*(log(1-U));
+Resultado=imnoises(I,'exponential',5,[]);
 figure
-imshow(uniforme+z)
+imshow(Resultado)
+title('exponencial')
 
-
-a=0.5;
-b=0.5;
-U = rand(size(img));
-z = U;
+Resultado=imnoises(I,'erlang',5,10);
 figure
-imshow(uniforme+z)
+imshow(Resultado)
+title('erlang')
 
+Resultado=imnoises(I,'salt&pepper',0.5,0.05);
+if Resultado~=-1
+figure
+imshow(Resultado)
+title('sal & pimienta')
+end
