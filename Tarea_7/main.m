@@ -48,7 +48,7 @@ figure
 imshow(Resultado)
 title('erlang')
 
-Resultado=imnoises(I,'salt&pepper',0.5,0.05);
+Resultado=imnoises(I,'salt&pepper',0.05,0.05);
 if Resultado~=-1
 figure
 imshow(Resultado)
