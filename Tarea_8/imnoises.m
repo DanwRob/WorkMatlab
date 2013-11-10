@@ -1,5 +1,5 @@
 function Salida=imnoises(I,opcion,a,b)% la función se llama imhistogram
-
+I=im2double(I);
 switch lower(opcion)
     case'uniform'
         U = rand(size(I));
@@ -41,7 +41,7 @@ switch lower(opcion)
             U = rand(size(I));
             c=find(U<=a);
             I(c)=0;
-            c=find(U>a&U<=a+b);
+            c=find(U>a&U<=(a+b));
             I(c)=1;
             Salida=I;
         end

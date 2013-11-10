@@ -15,59 +15,55 @@
 clear all; clc; close all; %Limpia todo antes de empezar
 
 
-img = imread('board_gaussian.tif');
-[m,n]=size(img);
-w=ones(5,5)/25;
-I2=imfilter(img,w);
-figure
-imshow(I2)
-title('Arithmetic mean')
+I = imread('board_salt_pepper.tif');
 
-
-g=im2double(img);
-f=exp(imfilter(log(g),ones(5,5),'replicate')).^(1/5/5);
+J1=splfilt(I,'gaussian',5,1);
 figure
-imshow(uint8(f*255))
-title('Geometric mean')
+imshow(J1)
+title('Gaussiano')
 
-g=im2double(img);
-h=5*5./imfilter(1./(g),ones(5,5),'replicate');
+J2=splfilt(I,'amean',5);
 figure
-imshow(uint8(h*255))
-title('Harmonic mean')
+imshow(J2)
+title('Media aritmietica')
 
-g=im2double(img);
-c=imfilter(g.^(1.5+1),ones(5,5),'replicate')./imfilter(g.^(1.5),ones(5,5),'replicate');
+J3=splfilt(I,'gmean',5);
 figure
-imshow(uint8(c*255))
+imshow(uint8(J3*255))
+title('Media geometrica')
+
+J4=splfilt(I,'hmean',5);
+figure
+imshow(uint8(J4*255))
+title('Medias harmonico')
+
+J5=splfilt(I,'chmean',3,1.5);
+figure
+imshow(uint8(J5*255))
 title('Contraharmonic mean')
 
-Me=ordfilt2(g,ceil(5*5/2),ones(5*5));
+J6=splfilt(I,'median',5);
 figure
-imshow(uint8(Me*255))
+imshow(uint8(J6*255))
 title('Median')
 
-k1=eye(5)|rot90(eye(5));
-k2=zeros(5);
-k2(ceil(5/2),:)=1;
-k2(:,ceil(5/2))=1;
-MH1=ordfilt2(g,fix(median(1:sum(sum(k1)))),ones(5*5));
-MH2=ordfilt2(g,fix(median(1:sum(sum(k2)))),ones(5*5));
-HB=zeros(m,n,3);
-HB(:,:,1)=MH1;
-HB(:,:,2)=MH2;
-HB(:,:,3)=g;
+J7=splfilt(I,'hybmedian',5);
 figure
-imshow(uint8(HB*255))
+imshow(uint8(J7*255))
 title('Hybmedian')
 
-Me=ordfilt2(g,1,ones(5*5));
+J8=splfilt(I,'max',5);
 figure
-imshow(uint8(Me*255))
+imshow(uint8(J8*255))
 title('Min')
 
-Me=ordfilt2(g,5*5,ones(5*5));
+J9=splfilt(I,'min',5);
 figure
-imshow(uint8(Me*255))
+imshow(uint8(J9*255))
 title('Max')
+
+J10=splfilt(I,'midpoint',5);
+figure
+imshow(uint8(J10*255))
+title('Midpoint')
 
