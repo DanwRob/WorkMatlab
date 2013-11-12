@@ -61,7 +61,7 @@
 \begin_body
 
 \begin_layout Title
-Tarea #7: Filtrado y Deteccion de bordes
+Tarea #7: Filtrado y Detección de bordes
 \end_layout
 
 \begin_layout Author
@@ -69,7 +69,7 @@ Dan Williams Robledo Cruz
 \end_layout
 
 \begin_layout Date
-10 de Noviembre del 2013
+11 de Noviembre del 2013
 \end_layout
 
 \begin_layout Address
@@ -85,14 +85,14 @@ Introducción
 \end_layout
 
 \begin_layout Standard
-El proceso de filtrado de imagenes es una tecnica cuyo objetivo es mejor
+El proceso de filtrado de imágenes es una técnica cuyo objetivo es mejor
  la apariencia visual de una imagen, ya sea en contraste, ruido, escala
  de grises,etc.
- Los metodos de filtrado los podemos dividir en:
+ Los métodos de filtrado los podemos dividir en:
 \end_layout
 
 \begin_layout Enumerate
-Dominio espacial: consisten en la manipulacion directa de los pixeles de
+Dominio espacial: consisten en la manipulación directa de los pixeles de
  la imagen
 \end_layout
 
@@ -101,12 +101,12 @@ Dominio en la frecuencia: usa como operador de mapeo a la DFT
 \end_layout
 
 \begin_layout Standard
-En esta practica se veran especificamente los de dominio espacial.
+En esta practica se verán específicamente los de dominio espacial.
 \end_layout
 
 \begin_layout Standard
-El filtrado espacilal consiste de un kernel y una operacion predefinida
- que se computa sobre los pixeles del kernel
+El filtrado espacial consiste de un kernel y una operación predefinida que
+ se computa sobre los pixeles del kernel
 \end_layout
 
 \begin_layout Standard
@@ -125,7 +125,7 @@ Para un filtro no lineal requiere especificar el tamaño del vecindario y
 \end_layout
 
 \begin_layout Standard
-Existen tres ftipos de filtros:
+Existen tres tipos de filtros:
 \end_layout
 
 \begin_layout Standard
@@ -219,7 +219,7 @@ Nombre
 \begin_inset Text
 
 \begin_layout Plain Layout
-Parametros
+Parámetros
 \end_layout
 
 \end_inset
@@ -522,10 +522,6 @@ tamaño kernel
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -536,7 +532,7 @@ Gaussiano
 \end_layout
 
 \begin_layout Standard
-Los coeficientes del kernelGaussiano se calculan con la siguiente expresión:
+Los coeficientes del kernel Gaussiano se calculan con la siguiente expresión:
 \end_layout
 
 \begin_layout Standard
@@ -551,17 +547,8 @@ h(x,y)=\frac{1}{N}*exp(-(x^{2}+y^{2})/2\sigma^{2})
 \end_layout
 
 \begin_layout Standard
-Se calcula los numeros aleatorios uniforme(
-\begin_inset Formula $\mathcal{U}(0,1)$
-\end_inset
-
-) con las dimensiones de la imagen, se aplica la formula para generar el
- ruido z=a+(b-a)*(
-\begin_inset Formula $\mathcal{U}(0,1)$
-\end_inset
-
-), al final se suma la imagen original mas el ruido, para obtener la imagen
- degradada.
+Se obtiene el kernel de Gaussiano y se aplica la función infiltre pasando
+ como parámetros la imagen y el kernel
 \end_layout
 
 \begin_layout Standard
@@ -614,7 +601,47 @@ kernel=kernel/sum(sum(kernel));
 
 \begin_layout Plain Layout
 
-Salida=imfilter(img,kernel);    
+Salida=infiltre(img,kernel);    
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 17.50.23.png
+	display false
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ruido Uniform filtrado con gaussiano
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -623,14 +650,14 @@ Salida=imfilter(img,kernel);
 \end_layout
 
 \begin_layout Subsubsection
-Media Aritmetica
+Media Aritmética
 \end_layout
 
 \begin_layout Standard
 El filtro más básico es el filtro de media aritmética (promedio).
  Su mayor uso es en la reducción de detalles ‘irrelevantes’ de la imagen.
- La implementación general para un filtro promedio de tamaño m×n (con my
- nimpares) se expresa como:
+ La implementación general para un filtro promedio de tamaño m×n se expresa
+ como:
 \end_layout
 
 \begin_layout Standard
@@ -645,22 +672,8 @@ El filtro más básico es el filtro de media aritmética (promedio).
 \end_layout
 
 \begin_layout Standard
-El ruido Gaussiano generalmente se produce en la etapa de adquisición debido
- al sensor, y puede ser causado por pobre iluminación, altas temperaturas.
-\end_layout
-
-\begin_layout Standard
-Se calculan los numeros aleatorios normales (Gaussianos) con media 0 y varianza
- 1(
-\begin_inset Formula $\mathcal{N}(0,1)$
-\end_inset
-
-), se genera el ruido con la formula z=a+(b-a)*
-\begin_inset Formula $\mathcal{N}(0,1)$
-\end_inset
-
-, al final se suma la imagen original mas el ruido, para obtener la imagen
- degradada.
+Se obtiene el kernel y se aplica la función infiltre pasando como parámetros
+ la imagen y el kernel.
 \end_layout
 
 \begin_layout Standard
@@ -678,7 +691,51 @@ kernel=ones(t_k)/(t_k^2);
 
 \begin_layout Plain Layout
 
-Salida=imfilter(img,kernel);
+Salida=infiltre(img,kernel);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 18.01.53.png
+	display false
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ruido Uniform filtrado con media aritmética
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -687,7 +744,7 @@ Salida=imfilter(img,kernel);
 \end_layout
 
 \begin_layout Subsubsection
-Media geometrica
+Media geométrica
 \end_layout
 
 \begin_layout Standard
@@ -710,6 +767,12 @@ Realiza un suavizado similar al filtro de medias aritméticas pero con menor
 \end_layout
 
 \begin_layout Standard
+Se obtiene el kernel y se aplica la función infiltre pasando como parámetros
+ la imagen y el kernel, Para poder usar la opción infiltre debemos modificar
+ la formula de productorias por sumatorias mn, 
+\end_layout
+
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
@@ -726,7 +789,47 @@ kernel=ones(t_k);
 
 \begin_layout Plain Layout
 
-Salida=exp(imfilter(log(g),kernel,'replicate')).^(1/t_k/t_k);     
+Salida=exp(infiltre(log(g),kernel,'replicate')).^(1/t_k/t_k);     
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 17.55.37.png
+	display false
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ruido Uniform filtrado con Media geométrica
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -735,7 +838,7 @@ Salida=exp(imfilter(log(g),kernel,'replicate')).^(1/t_k/t_k);
 \end_layout
 
 \begin_layout Subsubsection
-Media harmonica
+Media harmoníca
 \end_layout
 
 \begin_layout Standard
@@ -757,6 +860,12 @@ El filtro de medias harmónico está dado por la expresión:
 Este filtro trabaja bien con ruido tipo sal, aunque falla en ruido tipo
  pimienta.
  También funciona bien con ruido tipo Gaussiano.
+ 
+\end_layout
+
+\begin_layout Standard
+Se obtiene el kernel y se aplica la formula con la función infiltre pasando
+ como parámetros la imagen y el kernel.
 \end_layout
 
 \begin_layout Standard
@@ -777,7 +886,47 @@ kernel=ones(t_k);
 
 \begin_layout Plain Layout
 
-Salida=(t_k^2)./(imfilter(1./(g),kernel,'replicate'));
+Salida=(t_k^2)./(infiltre(1./(g),kernel,'replicate'));
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 18.04.04.png
+	display false
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ruido Gaussiano filtrado con medias harmonica
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -829,8 +978,44 @@ kernel=ones(t_k);
 
 \begin_layout Plain Layout
 
-Salida=imfilter(g.^(a+1),kernel,'replicate')./(imfilter(g.^(a),kernel,'replicate'))
+Salida=infiltre(g.^(a+1),kernel,'replicate')./(infiltre(g.^(a),kernel,'replicate'))
 ;         
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 18.05.31.png
+	display false
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -843,21 +1028,22 @@ Medias
 \end_layout
 
 \begin_layout Standard
-Se empieza comprobando que B sea un numero entero positivo, se genera el
- ruido con la sumatoria de numeros aleatorios exponeciales desde 1 hasta
- b, z=E
-\begin_inset Formula $_{1}$
-\end_inset
+\begin_inset Formula 
+\[
+\hat{f}(x,y)=\underset{(s,t)\epsilon S_{xy}}{median}\left\{ g(s,t)\right\} 
+\]
 
-+E
-\begin_inset Formula $_{2}$
-\end_inset
-
-+...+E
-\begin_inset Formula $_{b}$
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+El filtro de mediana, el cual como su nombre lo indica, reemplaza el valor
+ del pixel central por el valor de mediana del vecindario.
+ Los filtros de mediana son particularmente efectivos cuando el patrón de
+ ruido consiste de componentes fuertes (ruido impulsivo) y se desea preservar
+ la agudeza de los bordes.
 \end_layout
 
 \begin_layout Standard
@@ -890,8 +1076,149 @@ Salida=ordfilt2(g,ceil((t_k^2)/2),kernel);
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 17.26.55.png
+	display false
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ruido Salt&Pepper filtrado con mediana
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
-Sal & Pimienta
+Media Híbrida
+\end_layout
+
+\begin_layout Standard
+El filtro mediana híbrido preserva mejor los los bordes que el filtro mediana
+ original, debido a que obtiene información de diferentes direcciones espaciales.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+g=im2double(img);         
+\end_layout
+
+\begin_layout Plain Layout
+
+k1=eye(t_k)|rot90(eye(t_k));         
+\end_layout
+
+\begin_layout Plain Layout
+
+k2=zeros(t_k);         
+\end_layout
+
+\begin_layout Plain Layout
+
+k2(ceil(t_k/2),:)=1;         
+\end_layout
+
+\begin_layout Plain Layout
+
+k2(:,ceil(t_k/2))=1;         
+\end_layout
+
+\begin_layout Plain Layout
+
+MH1=ordfilt2(g,fix(median(1:sum(sum(k1)))),k1);         
+\end_layout
+
+\begin_layout Plain Layout
+
+MH2=ordfilt2(g,fix(median(1:sum(sum(k2)))),k2);         
+\end_layout
+
+\begin_layout Plain Layout
+
+HB=zeros(m,n,3);         
+\end_layout
+
+\begin_layout Plain Layout
+
+HB(:,:,1)=MH1;         
+\end_layout
+
+\begin_layout Plain Layout
+
+HB(:,:,2)=MH2;         
+\end_layout
+
+\begin_layout Plain Layout
+
+HB(:,:,3)=g;         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida=zeros(m,n);         
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:m             
+\end_layout
+
+\begin_layout Plain Layout
+
+for j=1:n                   
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida(i,j)=median(HB(i,j,:));            
+\end_layout
+
+\begin_layout Plain Layout
+
+end         
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -904,8 +1231,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename siete.png
-	scale 40
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 17.29.53.png
+	display false
+	scale 35
 
 \end_inset
 
@@ -916,6 +1244,15 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
+Ruido Salt filtrado con mediana
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -924,25 +1261,26 @@ status open
 
 \end_layout
 
-\end_inset
-
-
+\begin_layout Subsubsection
+Max
 \end_layout
 
 \begin_layout Standard
-El ruido sal y pimienta (ruido impulsivo) es generalmente causado por errores
- en la conversión analógico-digital, errores de bits en la transmisión,
- etc.
+El filtro de mediana representa el 50-ésimo percentil de un conjunto de
+ números ordenados.
+ Por otro lado, cuando se usa el 100-ésimo percentil se dice que es un filtro
+ max definido como:
 \end_layout
 
 \begin_layout Standard
-Se comprueba que la suma de a+b no sea mayor a 1, se generan numeros aleatorios
- uniformes 
-\begin_inset Formula $U(0,1)$
+\begin_inset Formula 
+\[
+\hat{f}(x,y)=\underset{(s,t)\epsilon S_{xy}}{max}\left\{ g(s,t)\right\} 
+\]
+
 \end_inset
 
-, se busca los numeros menores que (a) y se vuelven 0(Negro), luego se busca
- los pixeles mayores a U pero menores a la suma de a+b, y se vuelven 1(Blanco).
+
 \end_layout
 
 \begin_layout Standard
@@ -952,58 +1290,233 @@ status open
 
 \begin_layout Plain Layout
 
-if(a+b)>1             
+g=im2double(img);         
 \end_layout
 
 \begin_layout Plain Layout
 
-disp('La suma de a+b no debe ser mayor a 1, para el salt&pepper');     
-        
+kernel=ones(t_k);         
 \end_layout
 
 \begin_layout Plain Layout
 
-Salida=-1;                  
+Salida=ordfilt2(g,t_k^2,kernel);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 17.45.22.png
+	display false
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ruido Pepper filtrado con max
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
 
-else             
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Min
+\end_layout
+
+\begin_layout Standard
+El 0-ésimo percentil es el filtro min, que es el opuesto al filtro max y
+ se define como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{f}(x,y)=\underset{(s,t)\epsilon S_{xy}}{min}\left\{ g(s,t)\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+g=im2double(img);         
 \end_layout
 
 \begin_layout Plain Layout
 
-U = rand(size(I));             
+kernel=ones(t_k);         
 \end_layout
 
 \begin_layout Plain Layout
 
-c=find(U<=a);             
+Salida=ordfilt2(g,1,kernel);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 17.33.18.png
+	display false
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ruido Salt filtrado con min
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Punto Medio
+\end_layout
+
+\begin_layout Standard
+El filtro de punto medio simplemente computa el punto medio entre el máximo
+ y mínimo de un vecindario Sxy como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{f}(x,y)=\frac{1}{2}\left[\underset{(s,t)\epsilon S_{xy}}{max}\left\{ g(s,t)\right\} +\underset{(s,t)\epsilon S_{xy}}{min}\left\{ g(s,t)\right\} \right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Trabaja bien con Gaussiano o uniforme.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+g=im2double(img);         
 \end_layout
 
 \begin_layout Plain Layout
 
-I(c)=0;             
+kernel=ones(t_k);         
 \end_layout
 
 \begin_layout Plain Layout
 
-c=find(U>a&U<=a+b);             
+minimo=ordfilt2(g,1,kernel);         
 \end_layout
 
 \begin_layout Plain Layout
 
-I(c)=1;             
+maximo=ordfilt2(g,t_k^2,kernel);         
 \end_layout
 
 \begin_layout Plain Layout
 
-Salida=I;         
+Salida=imlincomb(1/2,minimo,1/2,maximo);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 17.55.37.png
+	display false
+	scale 35
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption
 
-end
+\begin_layout Plain Layout
+Ruido Gaussiano filtrado con midpont
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1019,12 +1532,311 @@ end
 \end_layout
 
 \begin_layout Subsection
-Resultados.
+Detección de bordes
 \end_layout
 
 \begin_layout Standard
-Ya aplicado los diferentes tipos de modelos de ruido sobre la Figura 10.
- el resultado fueron los siguientes
+Un borde es un cambio significativo en la intensidad local de la imagen.
+ Se pueden clasificar en 4 tipos:
+\end_layout
+
+\begin_layout Enumerate
+Borde escalón.
+\end_layout
+
+\begin_layout Enumerate
+Borde rampa.
+\end_layout
+
+\begin_layout Enumerate
+Borde impulso.
+\end_layout
+
+\begin_layout Enumerate
+Borde triangular.
+\end_layout
+
+\begin_layout Standard
+Implementar una función que se llame “edgefilt.m” que realice la detección
+ de bordes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+A.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gradient
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+B.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Prewitt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sobel
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+D.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kirsch
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+E.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Robinson
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+F.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Newton
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+G.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Laplacian
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+H.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LoG
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DoG
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Gradient
+\end_layout
+
+\begin_layout Standard
+el gradiente de f en el punto de coordenadas (x,y) se define como el vector:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\nabla f=\left[\frac{\partial f}{\partial x}\frac{\partial f}{\partial y}\right]^{T}=\left[\begin{array}{c}
+G_{x}\\
+G_{y}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Implementación de MatLab de forma indexada, Se calculan las gradientes en
+ x,y y se obtiene su manigtud.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+img=im2double(img);       
+\end_layout
+
+\begin_layout Plain Layout
+
+[Mi,Ni] = size(img);         
+\end_layout
+
+\begin_layout Plain Layout
+
+ix = [1,1:Ni-1];         
+\end_layout
+
+\begin_layout Plain Layout
+
+iy = [1,1:Mi-1];         
+\end_layout
+
+\begin_layout Plain Layout
+
+Gx = img(:,ix) - img;         
+\end_layout
+
+\begin_layout Plain Layout
+
+Gy = img(iy,:) - img;         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida = abs(Gx)+abs(Gy); 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1037,8 +1849,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename Tarea_7/cameraman.tif
-	scale 40
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 18.32.49.png
+	display false
+	scale 60
 
 \end_inset
 
@@ -1049,7 +1862,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Imagen de prueba: Cameraman.tiff
+Cameraman aplicado Gradiante 
 \end_layout
 
 \end_inset
@@ -1057,8 +1870,82 @@ Imagen de prueba: Cameraman.tiff
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Prewitt
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{x}=\left[\begin{array}{ccc}
+1 & 0 & -1\\
+1 & 0 & -1\\
+1 & 0 & -1
+\end{array}\right]G_{y}=\left[\begin{array}{ccc}
+1 & 1 & 1\\
+0 & 0 & 0\\
+-1 & -1 & -1
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+se obtiene las mascaras de convolucion para Gx y Gy, se aplica el infiltre
+ a la imagen sobre cada mascara y al final se suma la salida
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
 \begin_layout Plain Layout
 
+img = im2double(img);         
+\end_layout
+
+\begin_layout Plain Layout
+
+	Gx=[1,0,-1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	1,0,-1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	1,0,-1];         
+\end_layout
+
+\begin_layout Plain Layout
+
+Gy=Gx';         
+\end_layout
+
+\begin_layout Plain Layout
+
+x=infiltre(img,Gx,'replicate');               
+\end_layout
+
+\begin_layout Plain Layout
+
+y=infiltre(img,Gy,'replicate');         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida = abs(x)+abs(y);  
 \end_layout
 
 \end_inset
@@ -1074,19 +1961,431 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align left
+\align center
 \begin_inset Graphics
-	filename Ruidos.png
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 18.41.45.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cameraman aplicado Prewitt 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sobel
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{x}=\left[\begin{array}{ccc}
+1 & 0 & -1\\
+2 & 0 & -2\\
+1 & 0 & -1
+\end{array}\right]G_{y}=\left[\begin{array}{ccc}
+1 & 2 & 1\\
+0 & 0 & 0\\
+-1 & -2 & -1
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+se obtiene las mascaras de convolucion para Gx y Gy, se aplica el infiltre
+ a la imagen sobre cada mascara y al final se suma la salida
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+img = im2double(img);                
+\end_layout
+
+\begin_layout Plain Layout
+
+Gx=[1,0,-1;
+\end_layout
+
+\begin_layout Plain Layout
+
+	2,0,-2;
+\end_layout
+
+\begin_layout Plain Layout
+
+	1,0,-1];         
+\end_layout
+
+\begin_layout Plain Layout
+
+Gy=Gx';         
+\end_layout
+
+\begin_layout Plain Layout
+
+x=infiltre(img,Gx,'replicate');               
+\end_layout
+
+\begin_layout Plain Layout
+
+y=infiltre(img,Gy,'replicate');         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida = abs(x)+abs(y);   
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 19.04.50.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cameraman aplicado Sobel 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Kirsch
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 18.58.32.png
+	display false
 	scale 40
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+se obtiene las mascaras de convolucion, dependiente de los 2 tipos de mascara
+ seleccionada se aplica el imfiltre con sus determinadas mascaras, para
+ terminar se suman las 2 imagenes resultantes de cada mascara.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Salida=zeros(size(img));         
+\end_layout
+
+\begin_layout Plain Layout
+
+error=0;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+img = im2double(img);                
+\end_layout
+
+\begin_layout Plain Layout
+
+N=[-3,-3,-3;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	-3,0,-3;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	5,5,5];         
+\end_layout
+
+\begin_layout Plain Layout
+
+NE=[-3,-3,-3;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	5,0,-3;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	5,5,-3];                  
+\end_layout
+
+\begin_layout Plain Layout
+
+W=rot90(N);         
+\end_layout
+
+\begin_layout Plain Layout
+
+NW=rot90(NE);                 
+\end_layout
+
+\begin_layout Plain Layout
+
+S=rot90(W);         
+\end_layout
+
+\begin_layout Plain Layout
+
+SW=rot90(NW);                  
+\end_layout
+
+\begin_layout Plain Layout
+
+E=rot90(S);         
+\end_layout
+
+\begin_layout Plain Layout
+
+SE=rot90(SW);         
+\end_layout
+
+\begin_layout Plain Layout
+
+remain=A;         
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:2             
+\end_layout
+
+\begin_layout Plain Layout
+
+[token, remain] = strtok(remain);             
+\end_layout
+
+\begin_layout Plain Layout
+
+switch upper(token)                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'N'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=N;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'NE'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=NE;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'W'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=W;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'NW'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=NW;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'S'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=S;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'SW'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=SW;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'E'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=E;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'SE'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=SE;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	otherwise                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		error=1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	end             
+\end_layout
+
+\begin_layout Plain Layout
+
+if error~=-1              
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=infiltre(img,Kernel,'replicate');              
+\end_layout
+
+\begin_layout Plain Layout
+
+	Salida = Salida+abs(x);              
+\end_layout
+
+\begin_layout Plain Layout
+
+end         
+\end_layout
+
+\begin_layout Plain Layout
+
+end   
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 19.11.38.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Uniform a=0,b=0.5, gaussian a=0, b=0.3, lognormal a=0, b=0.1, rayleigh a=0,
- b=0.1, exponential a=5, erlang a=5, b=10, salt&pepper a=0.05, b=0.05
+Texture aplicado Kirsch 
 \end_layout
 
 \end_inset
@@ -1097,6 +2396,961 @@ Uniform a=0,b=0.5, gaussian a=0, b=0.3, lognormal a=0, b=0.1, rayleigh a=0,
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Robinson
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 19.14.12.png
+	display false
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+se obtiene las mascaras de convolucion, dependiente de los 2 tipos de mascara
+ seleccionada se aplica el infiltre con sus determinadas mascaras, para
+ terminar se suman las 2 imágenes resultantes de cada mascara.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Salida=zeros(size(img));         
+\end_layout
+
+\begin_layout Plain Layout
+
+error=0;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+img = im2double(img);                
+\end_layout
+
+\begin_layout Plain Layout
+
+N=[-1,-2,-1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	0,0,0;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	1,2,1];         
+\end_layout
+
+\begin_layout Plain Layout
+
+NE=[0,-1,-2;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	1,0,-1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	2,1,0];                 
+\end_layout
+
+\begin_layout Plain Layout
+
+W=rot90(N);         
+\end_layout
+
+\begin_layout Plain Layout
+
+NW=rot90(NE);                 
+\end_layout
+
+\begin_layout Plain Layout
+
+S=rot90(W);         
+\end_layout
+
+\begin_layout Plain Layout
+
+SW=rot90(NW);                  
+\end_layout
+
+\begin_layout Plain Layout
+
+E=rot90(S);         
+\end_layout
+
+\begin_layout Plain Layout
+
+SE=rot90(SW);         
+\end_layout
+
+\begin_layout Plain Layout
+
+remain=A;         
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:2             
+\end_layout
+
+\begin_layout Plain Layout
+
+[token, remain] = strtok(remain);             
+\end_layout
+
+\begin_layout Plain Layout
+
+switch upper(token)                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'N'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=N;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'NE'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=NE;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'W'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=W;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'NW'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=NW;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'S'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=S;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'SW'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=SW;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'E'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=E;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'SE'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=SE;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	otherwise                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		error=1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	end             
+\end_layout
+
+\begin_layout Plain Layout
+
+if error~=-1              
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=infiltre(img,Kernel,'replicate');              
+\end_layout
+
+\begin_layout Plain Layout
+
+	Salida = Salida+abs(x);              
+\end_layout
+
+\begin_layout Plain Layout
+
+end         
+\end_layout
+
+\begin_layout Plain Layout
+
+end   
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 19.15.48.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Texture aplicado Robinson 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Newton
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 19.16.52.png
+	display false
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+se obtiene las mascaras de convolucion, dependiente de los 2 tipos de mascara
+ seleccionada se aplica el infiltre con sus determinadas mascaras, para
+ terminar se suman las 2 imágenes resultantes de cada mascara.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Salida=zeros(size(img));         
+\end_layout
+
+\begin_layout Plain Layout
+
+error=0;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+img = im2double(img);                
+\end_layout
+
+\begin_layout Plain Layout
+
+N=[1,2,1;            
+\end_layout
+
+\begin_layout Plain Layout
+
+1,2,1;           
+\end_layout
+
+\begin_layout Plain Layout
+
+-2,-4,-2];         
+\end_layout
+
+\begin_layout Plain Layout
+
+NE=[1,1,2;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	-2,2,1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	-4,-2,1];                  
+\end_layout
+
+\begin_layout Plain Layout
+
+W=rot90(N);         
+\end_layout
+
+\begin_layout Plain Layout
+
+NW=rot90(NE);                 
+\end_layout
+
+\begin_layout Plain Layout
+
+S=rot90(W);         
+\end_layout
+
+\begin_layout Plain Layout
+
+SW=rot90(NW);                  
+\end_layout
+
+\begin_layout Plain Layout
+
+E=rot90(S);         
+\end_layout
+
+\begin_layout Plain Layout
+
+SE=rot90(SW);         
+\end_layout
+
+\begin_layout Plain Layout
+
+remain=A;         
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:2             
+\end_layout
+
+\begin_layout Plain Layout
+
+[token, remain] = strtok(remain);             
+\end_layout
+
+\begin_layout Plain Layout
+
+switch upper(token)                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'N'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=N;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'NE'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=NE;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'W'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=W;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'NW'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=NW;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'S'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=S;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'SW'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=SW;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'E'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=E;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 'SE'                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		Kernel=SE;                 
+\end_layout
+
+\begin_layout Plain Layout
+
+	otherwise                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		error=1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	end             
+\end_layout
+
+\begin_layout Plain Layout
+
+if error~=-1              
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=infiltre(img,Kernel,'replicate');              
+\end_layout
+
+\begin_layout Plain Layout
+
+	Salida = Salida+abs(x);              
+\end_layout
+
+\begin_layout Plain Layout
+
+end         
+\end_layout
+
+\begin_layout Plain Layout
+
+end   
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 19.20.30.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Texture aplicado Newton 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Laplaciano
+\end_layout
+
+\begin_layout Standard
+El Laplaciano de una imagen puede computarse mediante las siguientes máscaras
+ de convolución:
+\end_layout
+
+\begin_layout Standard
+\align center
+4 vecinos
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left[\begin{array}{ccc}
+0 & 1 & 0\\
+1 & -4 & 1\\
+0 & 0 & 0
+\end{array}\right]\left[\begin{array}{ccc}
+0 & -1 & 0\\
+-1 & 0 & -1\\
+0 & -1 & 0
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+8 vecinos
+\begin_inset Formula 
+\[
+\left[\begin{array}{ccc}
+-1 & -1 & -1\\
+-1 & 8 & -1\\
+-1 & -1 & -1
+\end{array}\right]\left[\begin{array}{ccc}
+1 & 1 & 1\\
+1 & -8 & 1\\
+1 & 1 & 1
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El Laplaciano detecta tanto los bordes de los objetos como el ruido.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+img=im2double(img);         
+\end_layout
+
+\begin_layout Plain Layout
+
+vecino4N=[0,1,0;           
+\end_layout
+
+\begin_layout Plain Layout
+
+	1,-4,1;           
+\end_layout
+
+\begin_layout Plain Layout
+
+	0,1,0];         
+\end_layout
+
+\begin_layout Plain Layout
+
+vecino4P=[0,-1,0;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	-1,4,-1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+	0,-1,0];          
+\end_layout
+
+\begin_layout Plain Layout
+
+vecino8P=[-1,-1,-1;           
+\end_layout
+
+\begin_layout Plain Layout
+
+		-1,8,-1;           
+\end_layout
+
+\begin_layout Plain Layout
+
+		-1,-1,-1];         
+\end_layout
+
+\begin_layout Plain Layout
+
+vecino8N=[1,1,1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+		1,-8,1;             
+\end_layout
+
+\begin_layout Plain Layout
+
+		1,1,1];         
+\end_layout
+
+\begin_layout Plain Layout
+
+switch(A)             
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 4               
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida=infiltre(img,vecino4P,'replicate');               
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida=abs(Salida);              
+\end_layout
+
+\begin_layout Plain Layout
+
+	case -4                
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida=infiltre(img,vecino4N,'replicate');                
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida=abs(Salida);              
+\end_layout
+
+\begin_layout Plain Layout
+
+	case 8               
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida=infiltre(img,vecino8P,'replicate');                        
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida=abs(Salida);                           
+\end_layout
+
+\begin_layout Plain Layout
+
+	case -8              
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida=infiltre(img,vecino8N,'replicate');              
+\end_layout
+
+\begin_layout Plain Layout
+
+		Salida=abs(Salida);          
+\end_layout
+
+\begin_layout Plain Layout
+
+end           
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 19.26.08.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cameraman aplicado Laplaciano 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+LoG
+\end_layout
+
+\begin_layout Standard
+El Laplaciano del Gaussiano (LoG) simultáneamente suaviza la imagen y detecta
+ los bordes de la imagen mediante el siguiente kernel:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{x^{2}+y^{2}-2\sigma^{2}}{\sigma^{2}}exp\left[-\frac{x^{2}+y^{2}}{2\sigma^{2}}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se calcula las mascara de convolucion gaussiana para poder aplicar el Log
+ a la imagen 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+img=im2double(img);         
+\end_layout
+
+\begin_layout Plain Layout
+
+kernel=ones(A);         
+\end_layout
+
+\begin_layout Plain Layout
+
+t=floor(A/2);         
+\end_layout
+
+\begin_layout Plain Layout
+
+for y=-t:t             
+\end_layout
+
+\begin_layout Plain Layout
+
+	forx=-t:t             
+\end_layout
+
+\begin_layout Plain Layout
+
+	kernel(y+t+1,x+t+1)=((x^2+y^2-(2*B^2))/B^4)*(exp(-(x^2+y^2)/(2*B^2)));
+                   	end         
+\end_layout
+
+\begin_layout Plain Layout
+
+end         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida=infiltre(img,kernel,'replicate');
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/cti201108/Desktop/Captura de pantalla 2013-11-11 a la(s) 19.34.44.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Cameraman aplicado LoG 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-1"
+
+\end_inset
+
+Digital Image Processing, Rafael C.
+ Gonzalez, Richard E.
+ Woods Steven L.
+ Eddins.
+ Gatesmask Publishing
 \end_layout
 
 \end_body

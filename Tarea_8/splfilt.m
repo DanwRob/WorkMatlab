@@ -49,14 +49,14 @@ switch lower(opcion)
                   Salida(i,j)=median(HB(i,j,:));
             end
         end
-    case'max'
-        g=im2double(img);
-        kernel=ones(t_k);
-        Salida=ordfilt2(g,1,kernel);
     case'min'
         g=im2double(img);
         kernel=ones(t_k);
-        Salida=ordfilt2(g,t_k^2,kernel);
+        Salida=ordfilt2(g,1,kernel);
+    case'max'
+        g=im2double(img);
+        kernel=ones(t_k);
+        Salida=ordfilt2(g,t_k^2,kernel,'symmetric');
     case'midpoint'
         g=im2double(img);
         kernel=ones(t_k);
