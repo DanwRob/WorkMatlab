@@ -5,7 +5,7 @@
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
-\language spanish-mexico
+\language english
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -25,7 +25,6 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
-\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -61,127 +60,86 @@
 \begin_body
 
 \begin_layout Title
-Tarea #7: Filtrado y Deteccion de bordes
+
+\lang spanish-mexico
+Tarea #7: Tipos de ruido
 \end_layout
 
 \begin_layout Author
+
+\lang spanish-mexico
 Dan Williams Robledo Cruz
 \end_layout
 
 \begin_layout Date
+
+\lang spanish-mexico
 10 de Noviembre del 2013
 \end_layout
 
 \begin_layout Address
+
+\lang spanish-mexico
 Procesamiento Digital de Imágenes
 \end_layout
 
 \begin_layout Right Address
+
+\lang spanish-mexico
 Cinvestav
 \end_layout
 
 \begin_layout Section
+
+\lang spanish-mexico
 Introducción
 \end_layout
 
 \begin_layout Standard
-El proceso de filtrado de imagenes es una tecnica cuyo objetivo es mejor
- la apariencia visual de una imagen, ya sea en contraste, ruido, escala
- de grises,etc.
- Los metodos de filtrado los podemos dividir en:
-\end_layout
 
-\begin_layout Enumerate
-Dominio espacial: consisten en la manipulacion directa de los pixeles de
- la imagen
-\end_layout
-
-\begin_layout Enumerate
-Dominio en la frecuencia: usa como operador de mapeo a la DFT
+\lang spanish-mexico
+La formacion de una imagen esta a cargo de algun traductor que mediante
+ la manipulacion de la luz que es emitida o reflejada por los objetos, durante
+ esta captura, los traductores o bien sea algun disturbio externo agregan
+ ruido a la imagen.
 \end_layout
 
 \begin_layout Standard
-En esta practica se veran especificamente los de dominio espacial.
+
+\lang spanish-mexico
+El procesamiento digital de imagenes busca reducir la mayor cantidad de
+ ruido asi como tambien mejorar las caractacteristi de dicha imagen.
 \end_layout
 
 \begin_layout Standard
-El filtrado espacilal consiste de un kernel y una operacion predefinida
- que se computa sobre los pixeles del kernel
-\end_layout
 
-\begin_layout Standard
-El filtrado espacial se puede categorizar en Lineal y No-Lineal 
-\end_layout
-
-\begin_layout Standard
-Para generar un filtro espacial lineal de tamaño m*n requiere especificar
- mn coeficientes de la mascara con la cual se realizara la suma de productos
- con los pixeles que cubre la mascara.
-\end_layout
-
-\begin_layout Standard
-Para un filtro no lineal requiere especificar el tamaño del vecindario y
- las operaciones que se realizaran sobre los pixeles del vencidario.
-\end_layout
-
-\begin_layout Standard
-Existen tres ftipos de filtros:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename a1.PNG
-	scale 45
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Tipos de filtros
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
+\lang spanish-mexico
+En esta practica se estudiaran los diferentes tipos de ruidos aplicandolos
+ en un progama de matlab, para poder enternder mejor su funcionamiento.
 \end_layout
 
 \begin_layout Section
+
+\lang spanish-mexico
 Desarrollo
 \end_layout
 
 \begin_layout Subsection
-Filtros pasa bajas.
+
+\lang spanish-mexico
+Descripción de la practica
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang spanish-mexico
+Implementar en Matlab que contamine una imagen con los siguientes modelos
+ de ruido.
 \end_layout
 
 \begin_layout Standard
-Implementar una función que se llame “splfilt.m” que realice el filtrado
- paso bajas de una imagen en escala de grises.
- La función implementará los siguientes filtros: 
-\end_layout
 
-\begin_layout Standard
+\lang spanish-mexico
 \begin_inset Float table
 placement H
 wide false
@@ -190,10 +148,11 @@ status open
 
 \begin_layout Plain Layout
 \align center
+
+\lang spanish-mexico
 \begin_inset Tabular
-<lyxtabular version="3" rows="11" columns="3">
+<lyxtabular version="3" rows="8" columns="2">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <row>
@@ -201,16 +160,9 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\lang spanish-mexico
 MODELO
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Nombre
 \end_layout
 
 \end_inset
@@ -219,7 +171,9 @@ Nombre
 \begin_inset Text
 
 \begin_layout Plain Layout
-Parametros
+
+\lang spanish-mexico
+PARAMETROS
 \end_layout
 
 \end_inset
@@ -230,15 +184,32 @@ Parametros
 \begin_inset Text
 
 \begin_layout Plain Layout
-Gaussiano
+
+\lang spanish-mexico
+uniform
 \end_layout
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+a y b
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\lang spanish-mexico
 gaussian
 \end_layout
 
@@ -248,7 +219,9 @@ gaussian
 \begin_inset Text
 
 \begin_layout Plain Layout
-tamaño kernel y sigma
+
+\lang spanish-mexico
+media y desviacion estandar
 \end_layout
 
 \end_inset
@@ -259,16 +232,9 @@ tamaño kernel y sigma
 \begin_inset Text
 
 \begin_layout Plain Layout
-Media aritmetica
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-amean
+\lang spanish-mexico
+rayleigh
 \end_layout
 
 \end_inset
@@ -277,123 +243,33 @@ amean
 \begin_inset Text
 
 \begin_layout Plain Layout
-tamaño kernel
-\end_layout
 
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Media geometrica
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-gmean
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tamaño kernel
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Medias harmonicas
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-hmean
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tamaño kernel
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Medias contraharmonico
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-chmean
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tamaño kernel y Q
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Mediana
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
+\lang spanish-mexico
 a y b
 \end_layout
 
 \end_inset
 </cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+lognormal
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-tamaño kernel
+
+\lang spanish-mexico
+a y b
 \end_layout
 
 \end_inset
@@ -404,16 +280,9 @@ tamaño kernel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Mediana hibrido
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-hybmedian
+\lang spanish-mexico
+exponential
 \end_layout
 
 \end_inset
@@ -422,7 +291,9 @@ hybmedian
 \begin_inset Text
 
 \begin_layout Plain Layout
-tamaño kernel
+
+\lang spanish-mexico
+a
 \end_layout
 
 \end_inset
@@ -433,16 +304,9 @@ tamaño kernel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Maximo
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-max
+\lang spanish-mexico
+erlang
 \end_layout
 
 \end_inset
@@ -451,36 +315,9 @@ max
 \begin_inset Text
 
 \begin_layout Plain Layout
-tamaño kernel
-\end_layout
 
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Minimo
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-min
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tamaño kernel
+\lang spanish-mexico
+a y b
 \end_layout
 
 \end_inset
@@ -491,16 +328,9 @@ tamaño kernel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Punto medio
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-midpoint
+\lang spanish-mexico
+salt&pepper
 \end_layout
 
 \end_inset
@@ -509,7 +339,9 @@ midpoint
 \begin_inset Text
 
 \begin_layout Plain Layout
-tamaño kernel
+
+\lang spanish-mexico
+Porcentaje de pixeles negros y blancos
 \end_layout
 
 \end_inset
@@ -520,7 +352,116 @@ tamaño kernel
 \end_inset
 
 
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+Modelos de ruido
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang spanish-mexico
+Ruido
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+Una definicion simple de ruido es cualquier componente indeseada en una
+ imagen.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+El proceso de degradacion se puede modelar como la funcion de degradacion
+ mas un termino de ruido auditivo que opera sobre la imagen de entrada f(x,y)
+ para poder producir una imagem degrada, no existe correlación entre los
+ valores de los píxeles y las componentes del ruido.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang spanish-mexico
+\begin_inset Graphics
+	filename restauracionModelos1.jpg
+	scale 35
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+Modelo de degradacion de imagen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang spanish-mexico
+Uniforme
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang spanish-mexico
+\begin_inset Graphics
+	filename dos.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+\begin_inset Caption
 
 \begin_layout Plain Layout
 
@@ -531,26 +472,14 @@ tamaño kernel
 
 \end_layout
 
-\begin_layout Subsubsection
-Gaussiano
-\end_layout
-
-\begin_layout Standard
-Los coeficientes del kernelGaussiano se calculan con la siguiente expresión:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-h(x,y)=\frac{1}{N}*exp(-(x^{2}+y^{2})/2\sigma^{2})
-\]
-
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 Se calcula los numeros aleatorios uniforme(
 \begin_inset Formula $\mathcal{U}(0,1)$
 \end_inset
@@ -565,8 +494,6 @@ Se calcula los numeros aleatorios uniforme(
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset listings
 lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
 inline false
@@ -574,47 +501,17 @@ status open
 
 \begin_layout Plain Layout
 
-kernel=ones(t_k);         
+U = rand(size(I));         
 \end_layout
 
 \begin_layout Plain Layout
 
-t=floor(t_k/2);         
+Salida=a+(b-a)*U;         
 \end_layout
 
 \begin_layout Plain Layout
 
-for y=-t:t             
-\end_layout
-
-\begin_layout Plain Layout
-
-for x=-t:t             
-\end_layout
-
-\begin_layout Plain Layout
-
-kernel(y+t+1,x+t+1)=exp(-(x^2+y^2)/(2*a^2));             
-\end_layout
-
-\begin_layout Plain Layout
-
-end         
-\end_layout
-
-\begin_layout Plain Layout
-
-end         
-\end_layout
-
-\begin_layout Plain Layout
-
-kernel=kernel/sum(sum(kernel));         
-\end_layout
-
-\begin_layout Plain Layout
-
-Salida=imfilter(img,kernel);    
+Salida=I+Salida;    
 \end_layout
 
 \end_inset
@@ -623,21 +520,46 @@ Salida=imfilter(img,kernel);
 \end_layout
 
 \begin_layout Subsubsection
-Media Aritmetica
+
+\lang spanish-mexico
+Gaussiano
 \end_layout
 
 \begin_layout Standard
-El filtro más básico es el filtro de media aritmética (promedio).
- Su mayor uso es en la reducción de detalles ‘irrelevantes’ de la imagen.
- La implementación general para un filtro promedio de tamaño m×n (con my
- nimpares) se expresa como:
+
+\lang spanish-mexico
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang spanish-mexico
+\begin_inset Graphics
+	filename tres.png
+	scale 35
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\hat{f}(x,y)=\frac{1}{mn}\underset{(s,t)\epsilon S_{xy}}{\sum}g(s,t)
-\]
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -645,11 +567,15 @@ El filtro más básico es el filtro de media aritmética (promedio).
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 El ruido Gaussiano generalmente se produce en la etapa de adquisición debido
  al sensor, y puede ser causado por pobre iluminación, altas temperaturas.
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 Se calculan los numeros aleatorios normales (Gaussianos) con media 0 y varianza
  1(
 \begin_inset Formula $\mathcal{N}(0,1)$
@@ -664,8 +590,6 @@ Se calculan los numeros aleatorios normales (Gaussianos) con media 0 y varianza
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset listings
 lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
 inline false
@@ -673,12 +597,17 @@ status open
 
 \begin_layout Plain Layout
 
-kernel=ones(t_k)/(t_k^2);         
+N = randn(size(I));         
 \end_layout
 
 \begin_layout Plain Layout
 
-Salida=imfilter(img,kernel);
+Salida=a+(b-a)*N;         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida=I+Salida;
 \end_layout
 
 \end_inset
@@ -687,162 +616,14 @@ Salida=imfilter(img,kernel);
 \end_layout
 
 \begin_layout Subsubsection
-Media geometrica
+
+\lang spanish-mexico
+Lognatural
 \end_layout
 
 \begin_layout Standard
-Una imagen restaurada con un filtro de media geométrica de tamaño m×n está
- dado por la expresión: 
-\begin_inset Formula 
-\[
-\hat{f}(x,y)=\left[\underset{(s,t)\epsilon S_{xy}}{\prod}g(s,t)\right]^{\frac{1}{mn}}
-\]
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Realiza un suavizado similar al filtro de medias aritméticas pero con menor
- pérdida de detalles de la imagen.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-g=im2double(img);        
-\end_layout
-
-\begin_layout Plain Layout
-
-kernel=ones(t_k);        
-\end_layout
-
-\begin_layout Plain Layout
-
-Salida=exp(imfilter(log(g),kernel,'replicate')).^(1/t_k/t_k);     
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Media harmonica
-\end_layout
-
-\begin_layout Standard
-El filtro de medias harmónico está dado por la expresión: 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\hat{f}(x,y)=\frac{mn}{\underset{(s,t)\epsilon S_{xy}}{\sum}\frac{1}{g(s,t)}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Este filtro trabaja bien con ruido tipo sal, aunque falla en ruido tipo
- pimienta.
- También funciona bien con ruido tipo Gaussiano.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-g=im2double(img);         
-\end_layout
-
-\begin_layout Plain Layout
-
-kernel=ones(t_k);         
-\end_layout
-
-\begin_layout Plain Layout
-
-Salida=(t_k^2)./(imfilter(1./(g),kernel,'replicate'));
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Medias contraharmonico
-\end_layout
-
-\begin_layout Standard
-El filtro de medias contraharmónico se basa en la expresión:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\hat{f}(x,y)=\frac{\underset{(s,t)\epsilon S_{xy}}{\sum}g(s,t)^{Q+1}}{\underset{(s,t)\epsilon S_{xy}}{\sum}g(s,t)^{Q}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Este filtro es útil para eliminar virtualmente los efectos del ruido sal
- y pimienta.
- Para valores positivos de Q se elimina el ruido pimienta y para valores
- negativos de Q se reduce el ruido sal.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-g=im2double(img);         
-\end_layout
-
-\begin_layout Plain Layout
-
-kernel=ones(t_k);         
-\end_layout
-
-\begin_layout Plain Layout
-
-Salida=imfilter(g.^(a+1),kernel,'replicate')./(imfilter(g.^(a),kernel,'replicate'))
-;         
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Erlang
-\end_layout
-
-\begin_layout Standard
+\lang spanish-mexico
 \begin_inset Float figure
 placement H
 wide false
@@ -851,8 +632,10 @@ status open
 
 \begin_layout Plain Layout
 \align center
+
+\lang spanish-mexico
 \begin_inset Graphics
-	filename seis.png
+	filename cuatro.png
 	scale 35
 
 \end_inset
@@ -861,6 +644,8 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang spanish-mexico
 \begin_inset Caption
 
 \begin_layout Plain Layout
@@ -872,6 +657,88 @@ status open
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+Se calculan los numeros aleatorios normales (Gaussianos) con media 0 y varianza
+ 1(
+\begin_inset Formula $\mathcal{N}(0,1)$
+\end_inset
+
+), se genera el ruido con la formula z=exp[b*
+\begin_inset Formula $\mathcal{N}(0,1)+a$
+\end_inset
+
+], al final se suma la imagen original mas el ruido, para obtener la imagen
+ degradada y se le aplica mat2gray para acomodar los niveles de grises.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+N = randn(size(I));         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida = exp(b*N + a);         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida=I+mat2gray(Salida);     
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang spanish-mexico
+Rayleigh
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang spanish-mexico
+\begin_inset Graphics
+	filename cinco.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+\begin_inset Caption
+
 \begin_layout Plain Layout
 
 \end_layout
@@ -881,7 +748,196 @@ status open
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
+
+\lang spanish-mexico
+Se calcula los numeros aleatorios uniforme(
+\begin_inset Formula $\mathcal{U}(0,1)$
+\end_inset
+
+) con las dimensiones de la imagen, se aplica la formula para generar el
+ ruido z=a+
+\begin_inset Formula $\sqrt{-b*log[1-\mathcal{U}(0,1)}]$
+\end_inset
+
+, al final se suma la imagen original mas el ruido, para obtener la imagen
+ degradada.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+U = rand(size(I));         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida = a+sqrt(-b*log(1-U));         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida=I+Salida;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang spanish-mexico
+Exponencial
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang spanish-mexico
+\begin_inset Graphics
+	filename uno.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+Se calcula los numeros aleatorios uniforme(
+\begin_inset Formula $\mathcal{U}(0,1)$
+\end_inset
+
+) con las dimensiones de la imagen, se aplica la formula para generar el
+ ruido z=(-1/a)*log [1-
+\begin_inset Formula $\mathcal{U}(0,1)$
+\end_inset
+
+], al final se suma la imagen original mas el ruido, para obtener la imagen
+ degradada.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+\begin_inset listings
+lstparams "basicstyle={\small},breaklines=true,language=Matlab,numbers=left,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+U = rand(size(I));         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida = (-1/a)*(log(1-U));         
+\end_layout
+
+\begin_layout Plain Layout
+
+Salida=I+Salida;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang spanish-mexico
+Erlang
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang spanish-mexico
+\begin_inset Graphics
+	filename seis.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang spanish-mexico
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish-mexico
 Se empieza comprobando que B sea un numero entero positivo, se genera el
  ruido con la sumatoria de numeros aleatorios exponeciales desde 1 hasta
  b, z=E
@@ -900,6 +956,8 @@ Se empieza comprobando que B sea un numero entero positivo, se genera el
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 \begin_inset listings
 lstparams "basicstyle={\small},breaklines=true,language=Matlab,showstringspaces=false"
 inline false
@@ -948,7 +1006,7 @@ end
 
 \begin_layout Plain Layout
 
-Salida=mat2gray(I+Salida);         
+Salida=I+mat2gray(Salida);         
 \end_layout
 
 \begin_layout Plain Layout
@@ -966,10 +1024,14 @@ end
 \end_layout
 
 \begin_layout Subsubsection
+
+\lang spanish-mexico
 Sal & Pimienta
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 \begin_inset Float figure
 placement H
 wide false
@@ -978,6 +1040,8 @@ status open
 
 \begin_layout Plain Layout
 \align center
+
+\lang spanish-mexico
 \begin_inset Graphics
 	filename siete.png
 	scale 40
@@ -988,6 +1052,8 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang spanish-mexico
 \begin_inset Caption
 
 \begin_layout Plain Layout
@@ -1005,12 +1071,16 @@ status open
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 El ruido sal y pimienta (ruido impulsivo) es generalmente causado por errores
  en la conversión analógico-digital, errores de bits en la transmisión,
  etc.
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 Se comprueba que la suma de a+b no sea mayor a 1, se generan numeros aleatorios
  uniformes 
 \begin_inset Formula $U(0,1)$
@@ -1021,6 +1091,8 @@ Se comprueba que la suma de a+b no sea mayor a 1, se generan numeros aleatorios
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 \begin_inset listings
 inline false
 status open
@@ -1087,6 +1159,8 @@ end
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 \begin_inset Newpage newpage
 \end_inset
 
@@ -1094,15 +1168,21 @@ end
 \end_layout
 
 \begin_layout Subsection
+
+\lang spanish-mexico
 Resultados.
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 Ya aplicado los diferentes tipos de modelos de ruido sobre la Figura 10.
  el resultado fueron los siguientes
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 \begin_inset Float figure
 placement H
 wide false
@@ -1111,6 +1191,8 @@ status open
 
 \begin_layout Plain Layout
 \align center
+
+\lang spanish-mexico
 \begin_inset Graphics
 	filename Tarea_7/cameraman.tif
 	scale 40
@@ -1121,18 +1203,18 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+
+\lang spanish-mexico
 \begin_inset Caption
 
 \begin_layout Plain Layout
+
+\lang spanish-mexico
 Imagen de prueba: Cameraman.tiff
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1142,6 +1224,8 @@ Imagen de prueba: Cameraman.tiff
 \end_layout
 
 \begin_layout Standard
+
+\lang spanish-mexico
 \begin_inset Float figure
 placement H
 wide false
@@ -1150,6 +1234,8 @@ status open
 
 \begin_layout Plain Layout
 \align left
+
+\lang spanish-mexico
 \begin_inset Graphics
 	filename Ruidos.png
 	scale 40
@@ -1160,6 +1246,8 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
+
+\lang spanish-mexico
 Uniform a=0,b=0.5, gaussian a=0, b=0.3, lognormal a=0, b=0.1, rayleigh a=0,
  b=0.1, exponential a=5, erlang a=5, b=10, salt&pepper a=0.05, b=0.05
 \end_layout
