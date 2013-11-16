@@ -16,28 +16,58 @@ clear all; clc; close all; %Limpia todo antes de empezar
 
 
 I =double (imread('patterns.bmp'));
-[Y,X]=size(I);
-
-[M,N]=meshgrid(0:Y-1,0:X-1);
-J=I.*((-1).^(M+N));
-J=fft2(J);
-%J=log(1*abs(J));
- 
-X2=X/2;
-Y2=Y/2;
-
-[V,U]=meshgrid(-Y2:Y2-1,-X2:X2-1);
-D=sqrt(U.^2+V.^2);
-n=2;
-D0=35;
-
-H=1./(1+(D/D0).^(2*n));
-
-H=1-H;
-
-HP=H.*J;%%%%%%%%%%pasa alta
-Hp=abs(ifft2(HP));
-imshow(Hp,[]);
 
 
+%/////////////////////////////////////Filtro pasa altas//////////////
+figure
+Salida=freqfilt(I,'lp','ideal',80); %Filtro Ideal
+subplot(3,1,1);
+%surf(Salida)
+%shading interp
+imshow(Salida,[]);
+title('Ideal LowPass')
+
+Salida=freqfilt(I,'lp','butterworth',80,2); %Filtro Butterworth
+subplot(3,1,2);
+%surf(Salida)
+%shading interp
+imshow(Salida,[]);
+title('Butterworth LowPass')
+
+Salida=freqfilt(I,'lp','gaussian',80);      %Filtro Gaussian
+subplot(3,1,3);
+%surf(Salida)
+imshow(Salida,[]);
+%shading interp
+title('Gaussian LowPass')
+
+%/////////////////////////////////////Filtro pasa altas//////////////
+figure
+Salida=freqfilt(I,'hp','ideal',80);         %Filtro Ideal
+subplot(3,1,1);
+%surf(Salida)
+imshow(Salida,[]);
+%shading interp
+title('Ideal HighPass')
+
+Salida=freqfilt(I,'hp','butterworth',80,2); %Filtro Butterworth
+subplot(3,1,2);
+%surf(Salida)
+imshow(Salida,[]);
+%shading interp
+title('Butterworth HighPass')
+
+Salida=freqfilt(I,'hp','gaussian',80);      %Filtro Gaussian
+subplot(3,1,3);
+%surf(Salida)
+imshow(Salida,[]);
+%shading interp
+title('Gaussian HighPass')
+
+
+%/////////////////////////////////////Filtro Laplaciano//////////////
+figure
+Salida==freqlap(I); %Filtro Laplaciano
+imshow(Salida,[]);
+title('Filtro Laplaciano')
 
