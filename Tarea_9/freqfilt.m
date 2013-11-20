@@ -1,7 +1,7 @@
 function Hp=freqfilt(I,tipo,opcion,D0,n)
 [Y,X]=size(I);                      %se obtiene el tamaño de la imagen
 [M,N]=meshgrid(0:Y-1,0:X-1);       
-F=I.*((-1).^(M+N));                 %se obtiene el tamaño de la imagen
+F=I.*((-1).^(M+N));                 %se traslada el origen al centro
 F=fft2(F);                          %se aplica la transformada de fourier
 
 switch lower(tipo)                  %Si es Low Pass o High Pass
@@ -49,7 +49,7 @@ switch lower(tipo)                  %Si es Low Pass o High Pass
                 Y2=Y/2;
                 [V,U]=meshgrid(-Y2:Y2-1,-X2:X2-1);
                 D=sqrt(U.^2+V.^2);                    %se calcula la frecuencia de corte de distancia  
-                H=1-(1./(1+(D/D0).^(2*n)));               %Se obtiene el filtro   
+                H=(1./(1+(D0./D).^(2*n)));               %Se obtiene el filtro   
                 Hp=H.*F;                              %Se multiplica el filtro por la transformada de Fourier  
                 Hp=abs(ifft2(Hp));                    % se aplica la inversa de la trasformada de fourier       
           case 'gaussian'
