@@ -102,7 +102,7 @@ function clahe_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
   c_imagen = handles.image; 
-  out=Clah(c_imagen,8,8,128,0.01);
+  out=Clah(c_imagen,2,2,128,60);
   axes( handles.a_clahe );
   imshow(out,[]); 
   guidata(hObject, handles); 

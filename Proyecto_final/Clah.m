@@ -12,11 +12,6 @@ XSize = round(XRes/NrX);
 YSize = round(YRes/NrY);
 NrPixels = XSize*YSize;
 
-if Cliplimit > 0 
-    ClipLimit = max(1,Cliplimit*XSize*YSize/NrBins);
-else
-    ClipLimit = 1E8;
-end
 
 if(mod(YRes,NrY)~=0)
   pad_Y=NrY-mod(YRes,NrY);
@@ -32,11 +27,9 @@ CEImage = zeros(YRes+pad_Y,XRes+pad_X);
 CEImage(1:YRes,1:XRes)=Image;
 size(CEImage)
 
-aux=zeros(YSize,XSize);
 for i=1:NrY
     for j=1:NrX
-        box=CEImage(1+(i-1)*YSize:i*YSize,1+(j-1)*XSize:j*XSize);
-        aux=histequal(box);
+        aux=histequal(CEImage(1+(i-1)*YSize:i*YSize,1+(j-1)*XSize:j*XSize),Cliplimit);
         CEImage(1+(i-1)*YSize:i*YSize,1+(j-1)*XSize:j*XSize)=aux;
     end
 end

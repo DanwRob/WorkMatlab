@@ -1,6 +1,4 @@
 function [Map] = mapHistogram(Hist,Min,Max,NrBins,NrPixels,NrX,NrY)
-%  This function calculates the equalized lookup table (mapping) by
-%  cumulating the input histogram. Note: lookup table is rescaled in range [Min..Max].
 
 Map=zeros(NrX,NrY,NrBins);
 
