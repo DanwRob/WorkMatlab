@@ -1,5 +1,5 @@
 function [CEImage] = CLAHE(Image,NrX,NrY,NrBins,Cliplimit)
-[YRes,XRes]=size(Image);
+[XRes,YRes]=size(Image);
 Min=min(Image(:));
 Max=max(Image(:));
 CEImage = zeros(YRes,XRes);
@@ -11,6 +11,8 @@ NrBins=max(NrBins,128);
 XSize = round(XRes/NrX);
 YSize = round(YRes/NrY);
 NrPixels = XSize*YSize;
+XSize2 = round(XSize/2);
+YSize2 = round(YSize/2);
 
 if Cliplimit > 0 
     ClipLimit = max(1,Cliplimit*XSize*YSize/NrBins);
