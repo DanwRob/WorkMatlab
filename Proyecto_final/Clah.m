@@ -55,22 +55,17 @@ for i = 1:NrY+1
             subX = XSize;
             
         end 
-        
             subImagen=zeros(subY,subX);
             subImagen= CEImage(yI:yI+subY-1,xI:xI+subX-1);
             for k = 0:subY-1
                 y=k/(subY-1);
                 for m = 0:subX-1
                     x=m/(subX-1);
-                       
-                        subImagen(k+1,l+1) = fix(( ((1-x)*(1-y)*(CEImage(yI,xI))) +...
-                        (x*(1-y)*CEImage(yI,xI+subX-1))+...
-                       ((1-x)*y*CEImage(yI+subY-1,xI))+...
-                        (x*y*CEImage(yI+subY-1,xI+subX-1))));
+                                           
 
                 end
             end
-            %subImage = interpolate(subImage,UL,UR,BL,BR,subX,subY);
+            
             CEImage(yI:yI+subY-1,xI:xI+subX-1) = subImagen;
         
         

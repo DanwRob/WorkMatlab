@@ -52,7 +52,7 @@ for i = 1:length(idx)
         ind = img==idx(i);         %se sustituyen los nuevos valores de grises en la imagen original
     Salida(ind)=cdf(idx(i)+1);
 end 
-Salida=uint8(Salida);
+
 
 
 

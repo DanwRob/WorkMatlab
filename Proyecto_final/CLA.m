@@ -1,101 +1,47 @@
-% CLAHE
-%
-%  Uses similar algorithm to AHE, except clips (by cliplevel) 
-%  large values of the pdf to help smooth out areas of constant values.
-%
-%  Bulk of code is exactly like AHE.  There is a small section that
-%  does the clipping.
-%
-%  Bradley C. Grimm 
-%  CS 6640 - Image Processing
-%  October 1, 2009
+function [CEImage] = CLA(Image,NrX,NrY,Cliplimit)
+[YRes,XRes]=size(Image);
+CEImage = zeros(YRes,XRes);
 
-function [ out ] = CLA( I, n, cliplevel, windowsize )
+if Cliplimit == 1
+    return
+end
 
-% Setup.
-r = floor((windowsize-1)/2);
-minI = min(min(I));
-maxI = max(max(I));
-step = (maxI - minI) / (n - 1);
+XSize = round(XRes/NrX);
+YSize = round(YRes/NrY);
 
-% Original approach.
-%cliplevel = cliplevel * n;
 
-H = zeros(n,1);
 
-[height width] = size(I);
-out = zeros(height, width);
-area = 0;
+if(mod(YRes,NrY)~=0)
+  pad_Y=NrY-mod(YRes,NrY);
+else
+ pad_Y=0;
+end
+if(mod(XRes,NrX)~=0)
+  pad_X=NrX-mod(XRes,NrX);
+else
+    pad_X=0;
+end
+CEImage = zeros(YRes+pad_Y,XRes+pad_X);
+CEImage(1:YRes,1:XRes)=Image;
 
-for j=1:height
-    % Find height of addition/subtraction boxes.
-    lowj = max(1, j - r);
-    highj = min(height, j + r);
-    
-    % Find height of addition/subtraction boxes.
-    for i=(-r+1):(width+r+1)
-        % Find the line that is no longer part of our window.
-        subi = i - r - 1;
-
-        % Add new line to window.
-        addi = i + r;
-        
-        % Remove pixels on the left edge.
-        if ( subi >= 1 )
-            % Create histogram, don't scale.
-            for jj = lowj:highj
-                idx = floor(I(jj, subi) / step) + 1;
-                H(idx) = H(idx) - 1;
-            end
-            % Modify histogram size (for later scaling).
-            area = area - (highj - lowj + 1);
-        end
-        
-        % Add pixels on the right edge.
-        if ( addi <= width )
-            % Create histogram, don't scale.
-            for jj = lowj:highj
-                idx = floor(I(jj, addi) / step) + 1;
-                H(idx) = H(idx) + 1;
-            end
-            % Modify histogram size (for later scaling).
-            area = area + (highj - lowj + 1);
-        end
-        
-        if ( i >= 1 && i <= width )
-            % Update pixel value.
-            idx = floor(I(j, i) / step) + 1;
-            val = 0;
-            
-            % Crop off the top
-            cropped = 0;
-            SH = H;
-			
-			% New clipping routine.
-			cliplevel = area * cliplevel;
-            for k=1:n
-                if ( SH(k) > cliplevel )
-                    cropped = cropped + (SH(k) - cliplevel);
-                    SH(k) = cliplevel;
-                end
-            end
-
-            % Spread out the cropped area.  Generate CDF.
-            spread = cropped / n;
-            for k=1:(idx-1)
-                val = val + SH(k) + spread;
-            end
-            
-            % Convert to true CDF value;
-            val = (val / area) * (n - 1);
-            
-            out(j, i) = val;
-        end
+for i=1:NrY
+    for j=1:NrX
+        aux=histequal(CEImage(1+(i-1)*YSize:i*YSize,1+(j-1)*XSize:j*XSize),Cliplimit);
+        CEImage(1+(i-1)*YSize:i*YSize,1+(j-1)*XSize:j*XSize)=aux;
     end
-    
+end
+[YRes,XRes]=size(CEImage);
+Salida=zeros(YRes+2,XRes+2);
+Salida(1,2:XRes+1)=CEImage(1,:);
+Salida(YRes+2,2:XRes+1)=CEImage(YRes,:);
+Salida(2:YRes+1,2:XRes+1)=CEImage;
+Salida(:,1)=Salida(:,2);
+Salida(:,end)=Salida(:,end-1);
+for y=2:YRes
+    for x=2:XRes
+        CEImage(y-1,x-1)=(Salida(y-1,x-1)+Salida(y-1,x+1)+Salida(y+1,x-1)+Salida(y+1,x+1))/4;
+    end
 end
 
-% Scale to viewable range.
-out = out / n;
 
-end
+

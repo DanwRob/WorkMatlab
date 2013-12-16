@@ -2,7 +2,7 @@ function [CEImage] = CLAHE(Image,NrX,NrY,NrBins,Cliplimit)
 [XRes,YRes]=size(Image);
 Min=min(Image(:));
 Max=max(Image(:));
-CEImage = zeros(YRes,XRes);
+CEImage = zeros(XRes,YRes);
 if Cliplimit == 1
     return
 end
@@ -32,11 +32,11 @@ Map=mapHistogram(Hist,Min,Max,NrBins,NrPixels,NrX,NrY);
 xI = 1;
 for i = 1:NrX+1
     if i == 1
-        subX = XSize/2;
+        subX = round(XSize/2);
         xU = 1;
         xB = 1;
     elseif i == NrX+1
-        subX = XSize/2;
+        subX = round(XSize/2);
         xU = NrX;
         xB = NrX;
     else
@@ -47,11 +47,11 @@ for i = 1:NrX+1
     yI = 1;
     for j = 1:NrY+1
         if j == 1
-            subY = YSize/2;
+            subY = round(YSize/2);
             yL = 1;
             yR = 1;
         elseif j == NrY+1
-            subY = YSize/2;
+            subY = round(YSize/2);
             yL = NrY;
             yR = NrY;
         else
