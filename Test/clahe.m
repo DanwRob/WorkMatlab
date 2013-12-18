@@ -1,4 +1,4 @@
-function [CEImage] = CLA(Image,numTiles,Cliplimit)
+function [CEImage] = clahe(Image,numTiles,Cliplimit)
 [YRes,XRes]=size(Image);
 CEImage=uint8(Image);
 numBins=256;
@@ -15,14 +15,19 @@ end
 dimTile =fix( [YRes,XRes] ./ numTiles);
 numPixInTile = prod(dimTile);               %pixeles totales en cada tile
 tileMappings = cell(numTiles);              %Cell array para los histogramas
+
+LUT=makeLUT(min(Image(:)),max(Image(:)),256);
+Bin=1+LUT(round(Image));
 for Row=1:numTiles(2)
     for Col=1:numTiles(1)
         %extraccion de cada title
-        tile = CEImage(sy(Row):sy(Row+1),sx(Col):sx(Col+1));
-        hist=imhist(tile,numBins);                             %Histograma de title
-        tile_temp=histequal(hist,Cliplimit,numBins);           %corte del histograma
+        tile = Bin(sy(Row):sy(Row+1),sx(Col):sx(Col+1));
+        %hist=imhist(tile,numBins);                             
+        YSize=sy(Row+1)-sy(Row); XSize=sx(Col+1)-sx(Col);
+        hist= makeHistogram(tile,YSize,XSize,numBins);
+        tile_temp=cliphist(hist,Cliplimit,numBins);           %corte del histograma
         tileMap = makeMap(tile_temp,[0 255],numPixInTile);     %Calculo de CDF
-        tileMappings{Row,Col} = 0-tileMap;                         
+        tileMappings{Row,Col} = tileMap;                         
     end 
 end
 %interpolacion bilineal

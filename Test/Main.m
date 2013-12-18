@@ -22,7 +22,7 @@ function varargout = Main(varargin)
 
 % Edit the above text to modify the response to help Main
 
-% Last Modified by GUIDE v2.5 07-Dec-2013 14:54:24
+% Last Modified by GUIDE v2.5 17-Dec-2013 22:04:28
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -102,12 +102,59 @@ function clahe_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
   c_imagen = handles.image; 
-  %out=uint8(Clah(c_imagen,4,4,60));
-  %out=uint8(CLA(c_imagen,[2,2],20));
-  %out=uint8(clahe2(c_imagen,8,8,10,1,'uniform'));
-  %out=uint8(test(c_imagen,[2,2],0.01));
-  %out=adapthisteq(c_imagen);
-  out=uint8(CLAHE(c_imagen,2,2,256,60));
+ tiles=str2num(get(handles.regiones,'String'));
+ limit=str2num(get(handles.clip,'String'));
+  [out]=uint8(clahe(c_imagen,tiles,limit));
+ 
   axes( handles.a_clahe );
   imshow(out); 
+  axes( handles.m_clahe );
+  hist=imhist(out,255);  
+  bar(hist); 
   guidata(hObject, handles); 
+
+
+
+function regiones_Callback(hObject, eventdata, handles)
+% hObject    handle to regiones (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of regiones as text
+%        str2double(get(hObject,'String')) returns contents of regiones as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function regiones_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to regiones (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function clip_Callback(hObject, eventdata, handles)
+% hObject    handle to clip (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of clip as text
+%        str2double(get(hObject,'String')) returns contents of clip as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function clip_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to clip (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

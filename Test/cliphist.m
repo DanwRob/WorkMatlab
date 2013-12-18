@@ -1,15 +1,18 @@
-function [hist]=histequal(h,clip,numBins)% la función se llama histequal
-totalExcess = sum(max(h - clip,0));  
+function [hist]=cliphist(h,clip,numBins)% la función se llama histequal
+%figure
+%bar(h);
 total=0;
 ClipLimit=clip/100;    
-clip=max(h)*(ClipLimit);
+clip=round(max(h)*(ClipLimit));
 
 for i=1:numBins
     if h(i)>clip
-        total=total+(h(i)-round(clip));
-          h(i)=round(clip);
+        total=total+(h(i)-clip);
+          h(i)=clip;
     end
 end
+
+%distribucion de pixeles cortados
 k=1;
 while (total~= 0)
    stepSize = max(floor(numBins/total),1);
@@ -23,12 +26,14 @@ while (total~= 0)
     end
   end
   
-  k = k+1; 
+  k = m+1; 
   if k > numBins 
     k = 1;
   end
 end
 hist=h;
+%figure
+%bar(hist);
 
 
 

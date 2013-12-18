@@ -1,6 +1,30 @@
-function [CEImage] = CLA(I,numTiles,cliplimit)
+function [CEImage] = CLA(I,numTiles,clip)
 dimI = size(I);
 dimTile = dimI ./numTiles;
+numBins=256;
+normClipLimit = clip;
+
+if isa(I,'int16')
+  I = int16touint16(I);
+  int16ClassChange = true;
+else
+  int16ClassChange = false;
+end
+
+distribution = 'uniform';
+alpha   = 0.4;
+
+if isa(I, 'double') || isa(I,'single')
+  fullRange = [0 1];
+else
+  fullRange(1) = I(1);         %copy class of the input image
+  fullRange(1:2) = [-Inf Inf]; %will be clipped to min and max
+  fullRange = double(fullRange);
+end
+
+selectedRange   = fullRange;
+
+
 
 rowDiv  = mod(dimI(1),numTiles(1)) == 0;
 colDiv  = mod(dimI(2),numTiles(2)) == 0;
@@ -69,6 +93,34 @@ minClipLimit = ceil(numPixInTile/numBins);
 clipLimit = minClipLimit + round(normClipLimit*(numPixInTile-minClipLimit));
 
 
+numPixInTile = prod(dimTile);
 
+tileMappings = cell(numTiles);
 
+% extract and process each tile
+imgCol = 1;
+for col=1:numTiles(2),
+  imgRow = 1;
+  for row=1:numTiles(1),
+    
+    tile = I(imgRow:imgRow+dimTile(1)-1,imgCol:imgCol+dimTile(2)-1);
+
+    % for speed, call MEX file directly thus avoiding costly
+    % input parsing of imhist
+    tileHist = imhist(tile, numBins); 
+    
+    tileHist = clipHistogram(tileHist, clipLimit, numBins);
+    
+    tileMapping = makeMapping(tileHist, selectedRange, fullRange, ...
+                              numPixInTile, distribution, alpha);
+    
+    % assemble individual tile mappings by storing them in a cell array;
+    tileMappings{row,col} = tileMapping;
+
+    imgRow = imgRow + dimTile(1);    
+  end
+  imgCol = imgCol + dimTile(2); % move to the next column of tiles
+end
+out = makeClaheImage(I, tileMappings, numTiles, selectedRange, numBins,...
+                     dimTile);
 

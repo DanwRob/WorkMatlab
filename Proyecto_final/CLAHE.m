@@ -11,8 +11,7 @@ NrBins=max(NrBins,128);
 XSize = round(XRes/NrX);
 YSize = round(YRes/NrY);
 NrPixels = XSize*YSize;
-XSize2 = round(XSize/2);
-YSize2 = round(YSize/2);
+
 
 if Cliplimit > 0 
     ClipLimit = max(1,Cliplimit*XSize*YSize/NrBins);
@@ -25,7 +24,7 @@ LUT=makeLUT(Min,Max,NrBins);
 Bin=1+LUT(round(Image));
 Hist = makeHistogram(Bin,XSize,YSize,NrX,NrY,NrBins);
 if Cliplimit > 0
-    Hist = clipHistogram(Hist,NrBins,ClipLimit,NrX,NrY);
+    Hist = clipHistogram2(Hist,NrBins,ClipLimit,NrX,NrY);
 end
 Map=mapHistogram(Hist,Min,Max,NrBins,NrPixels,NrX,NrY);
 % Interpolate
