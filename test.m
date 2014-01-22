@@ -1,6 +1,6 @@
 clear all, close all, clc
 
-intervalo=0.01;
+intervalo=0.2;
 [x,y]=meshgrid(0:intervalo:1);
 z=ones(size(x));
 z=1-(x+y);
