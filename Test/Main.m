@@ -86,7 +86,7 @@ function Imagen_Callback(hObject, eventdata, handles)
             %Do nothing yet 
         else 
            Imagen = imread(strcat(Path, FileName));
-          axes( handles.a_imagen );         
+           axes( handles.a_imagen );         
            imshow(Imagen); 
            
         end 
