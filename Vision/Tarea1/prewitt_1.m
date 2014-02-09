@@ -1,15 +1,6 @@
-clear all; close all; clc;
-img=imread('rose.tif');             %Lectura de la imagen
-[I,picos]=suavizar(img);            %Funcion para suavizar el histograma...
-                                     %y encontrar los picos
-N=(0:255)';
-valle=min(I(picos(1):picos(2)));     %Obtener valle entre los 2 picos
-idx_valle=find(I==valle);               
-
-figure
-bar(N, I, 0.5);
-axis([0 255 0 max(I)*1.1])
-hold on
-plot([picos(1) picos(1)],[0 max(I)],'r--','LineWidth',1.5);
-plot([idx_valle idx_valle],[0 max(I)],'m--','LineWidth',1.5);
-plot([picos(2) picos(2)],[0 max(I)],'r--','LineWidth',1.5);
+function [Salida,Hist,idx]=prewitt_1(img)
+[Hist,idx]=suavizar(img,3);            %Funcion para suavizar el histograma...
+valle=min(Hist(idx(1):idx(2)));     %Obtener valle entre los 2 picos
+idx(3)=find(Hist==valle);           %guarda el valle en la posicion 3 de idx
+Salida=zeros(size(img));            %si pixel es mayor o igual a la posicion del valle..
+Salida(img>=idx(3))=255;               %se vuelve 1, en caso contrario 0

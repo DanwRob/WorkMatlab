@@ -22,7 +22,7 @@ function varargout = Main(varargin)
 
 % Edit the above text to modify the response to help Main
 
-% Last Modified by GUIDE v2.5 07-Feb-2014 15:36:52
+% Last Modified by GUIDE v2.5 08-Feb-2014 14:01:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -52,6 +52,7 @@ function Main_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to Main (see VARARGIN)
 
 % Choose default command line output for Main
+clc;
 handles.output = hObject;
 handle.a_Image=[];
 % Update handles structure
@@ -59,9 +60,9 @@ guidata(hObject, handles);
 
 % This sets up the initial plot - only do when we are invisible
 % so window can get raised using Main.
-if strcmp(get(hObject,'Visible'),'off')
-    plot(rand(5));
-end
+%if strcmp(get(hObject,'Visible'),'off')
+ %   plot(rand(5));
+%end
 
 % UIWAIT makes Main wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -77,27 +78,6 @@ function varargout = Main_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-axes(handles.Hist);
-cla;
-
-popup_sel_index = get(handles.popupmenu1, 'Value');
-switch popup_sel_index
-    case 1
-        plot(rand(5));
-    case 2
-        plot(sin(1:0.01:25.99));
-    case 3
-        bar(1:.5:10);
-    case 4
-        plot(membrane);
-    case 5
-        surf(peaks);
-end
 
 
 % --------------------------------------------------------------------
@@ -118,15 +98,15 @@ if ~isequal(FileName, 0)
     axes( handles.imagen );         
     imshow(Imagen); 
     handles.a_Image=Imagen; 
+    
+    [I,N]=imhist(Imagen);      
+     I = I/sum(I);           
+     axes( handles.Hist); 
+    bar(N,I)
+    xlim([N(1) N(end)])
     guidata(hObject, handles); 
 end
 
-% --------------------------------------------------------------------
-function PrintMenuItem_Callback(hObject, eventdata, handles)
-% hObject    handle to PrintMenuItem (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-printdlg(handles.figure1)
 
 % --------------------------------------------------------------------
 function CloseMenuItem_Callback(hObject, eventdata, handles)
@@ -141,31 +121,6 @@ if strcmp(selection,'No')
 end
 
 delete(handles.figure1)
-
-
-% --- Executes on selection change in popupmenu1.
-function popupmenu1_Callback(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = get(hObject,'String') returns popupmenu1 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu1
-
-
-% --- Executes during object creation, after setting all properties.
-function popupmenu1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to popupmenu1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: popupmenu controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-     set(hObject,'BackgroundColor','white');
-end
-
-set(hObject, 'String', {'plot(rand(5))', 'plot(sin(1:0.01:25))', 'bar(1:.5:10)', 'plot(membrane)', 'surf(peaks)'});
 
 
 % --------------------------------------------------------------------
@@ -195,26 +150,39 @@ function Th_g_p_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 img=handles.a_Image;              %Lectura de la imagen
-[I,picos]=suavizar(img);            %Funcion para suavizar el histograma...
-                                     %y encontrar los picos
+[Salida,Hist,idx]=prewitt_1(img);
 N=(0:255)';
-valle=min(I(picos(1):picos(2)));     %Obtener valle entre los 2 picos
-idx_valle=find(I==valle);  
-axes( handles.Hist );         
-bar(N, I, 0.2);
-axis([0 255 0 max(I)*1.1])
-hold on
-plot([picos(1) picos(1)],[0 max(I)],'r--','LineWidth',1.5);
-plot([idx_valle idx_valle],[0 max(I)],'m--','LineWidth',1.5);
-plot([picos(2) picos(2)],[0 max(I)],'r--','LineWidth',1.5);
 
+axes(handles.img_salida);
+imshow(Salida);
+axes( handles.Hist );         
+bar(N, Hist);
+xlim([N(1) N(end)])
+hold on
+plot([idx(1) idx(1)],[0 max(Hist)],'r--','LineWidth',1.5);
+plot([idx(3) idx(3)],[0 max(Hist)],'m--','LineWidth',1.5);
+plot([idx(2) idx(2)],[0 max(Hist)],'r--','LineWidth',1.5);
+hold off
 
 % --------------------------------------------------------------------
 function Th_g_pII_Callback(hObject, eventdata, handles)
 % hObject    handle to Th_g_pII (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+img=handles.a_Image;              %Lectura de la imagen
+[Salida,Hist,idx]=prewitt_2(img);
+N=(0:255)';
 
+axes(handles.img_salida);
+imshow(Salida);
+axes( handles.Hist );         
+bar(N, Hist);
+xlim([N(1) N(end)])
+hold on
+plot([idx(1) idx(1)],[0 max(Hist)],'r--','LineWidth',1.5);
+plot([idx(3) idx(3)],[0 max(Hist)],'m--','LineWidth',1.5);
+plot([idx(2) idx(2)],[0 max(Hist)],'r--','LineWidth',1.5);
+hold off
 
 
 % --------------------------------------------------------------------
@@ -262,12 +230,5 @@ function Th_g_kII_Callback(hObject, eventdata, handles)
 % --------------------------------------------------------------------
 function Th_g_ra_Callback(hObject, eventdata, handles)
 % hObject    handle to Th_g_ra (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-% --- Executes when p_img is resized.
-function p_img_ResizeFcn(hObject, eventdata, handles)
-% hObject    handle to p_img (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
