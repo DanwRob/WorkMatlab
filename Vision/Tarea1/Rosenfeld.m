@@ -27,7 +27,6 @@ locales=zeros(256,1);
     for x=2:255
         if Diferencia(x-1)<Diferencia(x) && Diferencia(x)>Diferencia(x+1)   %comprueba si es pico.       
             locales(x)=Diferencia(x);                                                %vector de indice de picos.
-            
         end
     end
     
