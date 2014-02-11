@@ -1,16 +1,16 @@
 
 function [Salida,idx_t,Hist]=Kapur(img)
 
-[Hist]=imhist(img);
+[Hist]=imhist(img); %calcula histograma de la imagen
 
-Probabilidades=Hist/sum(Hist);
+Probabilidades=Hist/sum(Hist);      %calcula probabilidades de los niveles de grises
 Ps=zeros(256,1);
 Hs=zeros(256,1);
-Hn=-1*(Probabilidades.*log(Probabilidades));
+Hn=-1*(Probabilidades.*log(Probabilidades));  %Calculo de Hn     
 Hn(isnan(Hn))=0;
 
 for x=1:256
-    Ps(x)=sum(Probabilidades(1:x));
+    Ps(x)=sum(Probabilidades(1:x));         %
 end
 
 for x=1:256    
