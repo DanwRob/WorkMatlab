@@ -1,5 +1,4 @@
-clear all; close all; clc;
-img=imread('rose.tif');
+function [Salida,idx_t,Hist]=Ramesh(img)
 [Hist,N]=imhist(img);
 A=sum(Hist);
 B=sum(N.*Hist);
@@ -25,5 +24,7 @@ for x=1:256
 end
  Er(isinf(Er))=NaN;
  Er(isnan(Er))=max(Er);
- t=min(Er)
+ t=min(Er);
  idx_t=find(Er==t,1);
+ Salida=zeros(size(img));            
+ Salida(img>=idx_t)=255; 

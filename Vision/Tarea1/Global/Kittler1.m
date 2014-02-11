@@ -1,6 +1,4 @@
-
-clear all; close all; clc;
-img=imread('rose.tif');
+function [Salida,idx_t,Hist]=Kittler1(img)
 [Hist,N]=imhist(img);
 A=sum(Hist);
 B=sum(N.*Hist);
@@ -28,3 +26,5 @@ end
     Ei(isnan(Ei))=max(Ei);
     t=min(Ei);
     idx_t=find(Ei==t,1);
+    Salida=zeros(size(img));            
+    Salida(img>=idx_t)=255; 

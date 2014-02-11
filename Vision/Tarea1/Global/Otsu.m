@@ -1,6 +1,4 @@
-
-clear all; close all; clc;
-img=imread('cameraman.tif');
+function [Salida,idx_t,Hist]=Otsu(img)
 [Hist,N]=imhist(img);
 
 A=sum(Hist);
@@ -18,4 +16,5 @@ end
 varianza=(Aj.*(A-Aj)).*((Miu-Vt).^2);
 t=max(varianza);
 idx_t=find(varianza==t,1);
- 
+ Salida=zeros(size(img));            
+Salida(img>=idx_t)=255;   

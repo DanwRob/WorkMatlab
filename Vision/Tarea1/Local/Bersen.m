@@ -1,7 +1,6 @@
-clear all; close all; clc;
-img=double(imread('text1.tif'));
-Salida=img;
-b=5; t=20;
+function [Salida]=Bersen(img,valor)
+
+b=str2double(valor(1)); t=str2double(valor(2));
 kernel = ones(b,b);
 Max=ordfilt2(img,(b*b),kernel,'symmetric');
 Min=ordfilt2(img,1,kernel,'symmetric');
@@ -13,8 +12,6 @@ T(T<img)=0;
 C(C>t)=255;
 C(C<=t)=0;
 
-I=T&C;
-I=I*255;
-I=255-I;
-
-imshow(I)
+Salida=T&C;
+Salida=Salida*255;
+Salida=255-Salida;

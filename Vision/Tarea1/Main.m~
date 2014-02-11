@@ -35,9 +35,7 @@ gui_State = struct('gui_Name',       mfilename, ...
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
-addpath('./Global');
-addpath('./Local');
-addpath('./imagen')
+addpatch=
 if nargout
     [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
 else
@@ -212,7 +210,7 @@ function Th_g_t_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 img=handles.a_Image;              %Lectura de la imagen
-[Salida,idx,H]=Tsai(img);
+[Salida,idx,H]=Tsau(img);
 N=(0:255)';
 axes(handles.img_salida);
 imshow(Salida);

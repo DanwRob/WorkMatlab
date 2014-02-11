@@ -1,5 +1,4 @@
-clear all; close all; clc;
-img=imread('rose.tif');
+function [Salida,idx_t,Hist]=Ridler(img)
 [Hist,N]=imhist(img);
 aux=1;
 A=sum(Hist);
@@ -14,3 +13,6 @@ while aux
     end
     t=floor(t_s);
 end
+idx_t=t;
+ Salida=zeros(size(img));            
+Salida(img>=idx_t)=255;  

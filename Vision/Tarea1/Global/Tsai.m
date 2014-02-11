@@ -1,5 +1,4 @@
-clear all; close all; clc;
-img=imread('cameraman.tif');
+function [Salida,idx_t,Hist]=Tsai(img)
 [Hist,N]=imhist(img);
 
 
@@ -23,5 +22,7 @@ X1=((B*D)-(C^2))/((A*C)-(B^2));
 X2=((B*C)-A*D)/((A*C)-B^2);
 X0=0.5-(((B/A)+(X2/2))/(sqrt((X2^2)-(4*X1))));
 
-J=abs(H-X0);
-bar(N,J)
+t=abs(H-X0);
+idx_t=find(t==min(t))
+Salida=zeros(size(img)); 
+Salida(img>=idx_t)=255;               

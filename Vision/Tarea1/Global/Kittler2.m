@@ -1,6 +1,4 @@
-
-clear all; close all; clc;
-img=imread('rose.tif');
+function [Salida,idx_t,Hist]=Kittler2(img)
 [Hist,N]=imhist(img);
 t=256/2;
 aux=1;
@@ -27,6 +25,8 @@ while aux
    if t==floor(t_s)
        aux=0;
    end
-   t=floor(t_s)
+   t=floor(t_s);
 end
-   
+   idx_t=t;
+    Salida=zeros(size(img));            
+    Salida(img>=idx_t)=255; 

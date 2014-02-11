@@ -1,8 +1,9 @@
-clear all; close all; clc;
-img=imread('cameraman.tif');
-[Hist,N]=imhist(img);
 
-Probabilidades=Hist/sum(Hist);
+function [Salida,idx_t,Hist]=Kapur(img)
+
+[Hist]=imhist(img); %calcula histograma de la imagen
+
+Probabilidades=Hist/sum(Hist);      %calcula probabilidades de los niveles de grises
 Ps=zeros(256,1);
 Hs=zeros(256,1);
 Hn=-1*(Probabilidades.*log(Probabilidades));
@@ -21,3 +22,5 @@ Hb=log(1-Ps)+((Hn-Hs)./(1-Ps));
 entropia=Ha+Hb;
 t=max(entropia);
 idx_t=find(entropia==t,1);
+Salida=zeros(size(img));            
+Salida(img>=idx_t)=255; 
