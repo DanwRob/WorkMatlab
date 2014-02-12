@@ -22,7 +22,7 @@ function varargout = Main(varargin)
 
 % Edit the above text to modify the response to help Main
 
-% Last Modified by GUIDE v2.5 11-Feb-2014 15:02:01
+% Last Modified by GUIDE v2.5 11-Feb-2014 23:05:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,7 +56,12 @@ function Main_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for Main
 clc;
 handles.output = hObject;
-handle.a_Image=[];
+handles.a_Image=[];
+handles.ImgName=[];
+handles.ImgDir=[];
+handles.imsave=[];
+handles.tipo=[];
+handles.t=[];
 % Update handles structure
 guidata(hObject, handles);
 
@@ -100,7 +105,8 @@ if ~isequal(FileName, 0)
     axes( handles.imagen );         
     imshow(Imagen); 
     handles.a_Image=Imagen; 
-    
+    handles.ImgDir=Path; 
+    handles.ImgName=FileName; 
     [I,N]=imhist(Imagen); 
      
      I = I/sum(I);  
@@ -167,6 +173,11 @@ plot([idx(3) idx(3)],[0 max(Hist)],'m--','LineWidth',1.5);
 plot([idx(2) idx(2)],[0 max(Hist)],'r--','LineWidth',1.5);
 hold off
 
+handles.imsave=Salida;
+handles.tipo='Prewitt_Th';
+handles.t=num2str(idx(3));
+guidata(hObject, handles);
+
 % --------------------------------------------------------------------
 function Th_g_pII_Callback(hObject, eventdata, handles)
 % hObject    handle to Th_g_pII (see GCBO)
@@ -186,7 +197,10 @@ plot([idx(1) idx(1)],[0 max(Hist)],'r--','LineWidth',1.5);
 plot([idx(3) idx(3)],[0 max(Hist)],'m--','LineWidth',1.5);
 plot([idx(2) idx(2)],[0 max(Hist)],'r--','LineWidth',1.5);
 hold off
-
+handles.imsave=Salida;
+handles.tipo='PrewittII_Th';
+handles.t=num2str(idx(3));
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function Th_g_r_Callback(hObject, eventdata, handles)
@@ -204,6 +218,10 @@ xlim([N(1) N(end)])
 hold on
 plot([idx idx],[0 max(H)],'r--','LineWidth',1.5);
 hold off
+handles.imsave=Salida;
+handles.tipo='Rosenfeld_Th';
+handles.t=num2str(idx);
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function Th_g_t_Callback(hObject, eventdata, handles)
@@ -221,6 +239,10 @@ xlim([N(1) N(end)])
 hold on
 plot([idx idx],[0 max(H)],'r--','LineWidth',1.5);
 hold off
+handles.imsave=Salida;
+handles.tipo='Tsai_Th';
+handles.t=num2str(idx);
+guidata(hObject, handles);
 
 
 % --------------------------------------------------------------------
@@ -239,7 +261,10 @@ xlim([N(1) N(end)])
 hold on
 plot([idx idx],[0 max(H)],'r--','LineWidth',1.5);
 hold off
-
+handles.imsave=Salida;
+handles.tipo='Otsu_Th';
+handles.t=num2str(idx);
+guidata(hObject, handles);
 % --------------------------------------------------------------------
 function Th_g_ri_Callback(hObject, eventdata, handles)
 % hObject    handle to Th_g_ri (see GCBO)
@@ -256,6 +281,10 @@ xlim([N(1) N(end)])
 hold on
 plot([idx idx],[0 max(H)],'r--','LineWidth',1.5);
 hold off
+handles.imsave=Salida;
+handles.tipo='Ridler_Th';
+handles.t=num2str(idx);
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function Th_g_k_Callback(hObject, eventdata, handles)
@@ -273,6 +302,10 @@ xlim([N(1) N(end)])
 hold on
 plot([idx idx],[0 max(H)],'r--','LineWidth',1.5);
 hold off
+handles.imsave=Salida;
+handles.tipo='Kittler1_Th';
+handles.t=num2str(idx);
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function Th_g_kII_Callback(hObject, eventdata, handles)
@@ -290,6 +323,10 @@ xlim([N(1) N(end)])
 hold on
 plot([idx idx],[0 max(H)],'r--','LineWidth',1.5);
 hold off
+handles.imsave=Salida;
+handles.tipo='KittlerII_Th';
+handles.t=num2str(idx);
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function Th_g_ra_Callback(hObject, eventdata, handles)
@@ -307,6 +344,10 @@ xlim([N(1) N(end)])
 hold on
 plot([idx idx],[0 max(H)],'r--','LineWidth',1.5);
 hold off
+handles.imsave=Salida;
+handles.tipo='Ramesh_Th';
+handles.t=num2str(idx);
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function Th_g_kr_Callback(hObject, eventdata, handles)
@@ -324,6 +365,10 @@ xlim([N(1) N(end)])
 hold on
 plot([idx idx],[0 max(H)],'r--','LineWidth',1.5);
 hold off
+handles.imsave=Salida;
+handles.tipo='Kapur_Th';
+handles.t=num2str(idx);
+guidata(hObject, handles);
 
 
 % --------------------------------------------------------------------
@@ -347,6 +392,10 @@ axes( handles.Hist );
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=Salida;
+handles.tipo='Niblack_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
 
 
 
@@ -372,6 +421,10 @@ axes( handles.Hist );
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=Salida;
+handles.tipo='Sauvola_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
 
 
 
@@ -396,6 +449,10 @@ axes( handles.Hist );
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=Salida;
+handles.tipo='Wellner_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function Th_l_wh_Callback(hObject, eventdata, handles)
@@ -418,6 +475,10 @@ axes( handles.Hist );
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=Salida;
+handles.tipo='White_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
 
 
 % --------------------------------------------------------------------
@@ -441,6 +502,10 @@ axes( handles.Hist );
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=Salida;
+handles.tipo='Bersen_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
 
 
 % --------------------------------------------------------------------
@@ -448,7 +513,26 @@ function Th_l_ya_Callback(hObject, eventdata, handles)
 % hObject    handle to Th_l_ya (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+prompt = {'w=','T1=','T2=','T3=','T4='};
+dlg_title = 'Datos para la funcion';
+num_lines = 1;
+def = {'5','20','20','200','200'};
+answer = inputdlg(prompt,dlg_title,num_lines,def);
+valor=str2double(answer);
+img=handles.a_Image;              %Lectura de la imagen
+[Salida]=Yasuda(img,valor);
 
+axes(handles.img_salida);
+imshow(~Salida);
+
+axes( handles.Hist ); 
+[H,N]=imhist(img);
+bar(N,H)
+xlim([N(1) N(end)])
+handles.imsave=~Salida;
+handles.tipo='Yasuda_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function Th_l_ei_Callback(hObject, eventdata, handles)
@@ -471,6 +555,11 @@ axes( handles.Hist );
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=~Salida;
+handles.tipo='Eikvil_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
+
 
 % --------------------------------------------------------------------
 function Th_l_ka_Callback(hObject, eventdata, handles)
@@ -485,14 +574,18 @@ answer = inputdlg(prompt,dlg_title,num_lines,def);
 valor=str2double(answer);
 img=handles.a_Image;              %Lectura de la imagen
 [Salida]=th_kamel(img,valor(1),valor(2));
-
+Salida=~Salida;
 axes(handles.img_salida);
-imshow(~Salida);
+imshow(Salida);
 
 axes( handles.Hist ); 
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=Salida;
+handles.tipo='Kamel_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
 
 
 % --------------------------------------------------------------------
@@ -516,6 +609,10 @@ axes( handles.Hist );
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=Salida;
+handles.tipo='Parker_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
 
 
 % --------------------------------------------------------------------
@@ -539,3 +636,18 @@ axes( handles.Hist );
 [H,N]=imhist(img);
 bar(N,H)
 xlim([N(1) N(end)])
+handles.imsave=~Salida;
+handles.tipo='Palumbo_Th';
+handles.t=num2str(NaN);
+guidata(hObject, handles);
+
+
+% --------------------------------------------------------------------
+function save_Callback(hObject, eventdata, handles)
+% hObject    handle to save (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+  [ruta,name,ext]=fileparts(strcat(handles.ImgDir,handles.ImgName));
+  
+  save=strcat(ruta,'/',name,'_',handles.tipo,'_',handles.t,'.bmp');
+  imwrite(handles.imsave,save);
