@@ -1,5 +1,4 @@
 function B = th_palumbo(I,T)
-
 I = double(I);
 w = 3;
 [An,Ac] = neighboors(w);

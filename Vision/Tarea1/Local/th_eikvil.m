@@ -1,4 +1,5 @@
-function B = th_eikvil(I,t)
+function B = th_eikvil(I,valor)
+t=str2double(valor);
 % Si la imagen no es de dimensiones impares elimina el ultimo renglon y/o
 % columna
 [N,M] = size(I);

@@ -22,6 +22,6 @@ X2=((B*C)-A*D)/((A*C)-B^2);                        %calculo de X2
 X0=0.5-(((B/A)+(X2/2))/(sqrt((X2^2)-(4*X1))));      %calculo X0
 
 t=abs(H-X0);                    %diferencia del histograma y X0
-idx_t=find(t==min(t))           %el umbral t se obtiene cuando el valor Xo se acerca a At/A
+idx_t=find(t==min(t));           %el umbral t se obtiene cuando el valor Xo se acerca a At/A
 Salida=zeros(size(img)); 
 Salida(img>=idx_t)=255;        %se asigna 255 si el pixel es mayor al umbral t, en caso comtratop se asigna 0       

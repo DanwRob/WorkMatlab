@@ -22,7 +22,7 @@ function varargout = Main(varargin)
 
 % Edit the above text to modify the response to help Main
 
-% Last Modified by GUIDE v2.5 10-Feb-2014 14:26:06
+% Last Modified by GUIDE v2.5 11-Feb-2014 15:02:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -156,7 +156,6 @@ function Th_g_p_Callback(hObject, eventdata, handles)
 img=handles.a_Image;              %Lectura de la imagen
 [Salida,Hist,idx]=prewitt_1(img);
 N=(0:255)';
-
 axes(handles.img_salida);
 imshow(Salida);
 axes( handles.Hist );         
@@ -403,6 +402,22 @@ function Th_l_wh_Callback(hObject, eventdata, handles)
 % hObject    handle to Th_l_wh (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+prompt = {'b=','w='};
+dlg_title = 'Datos para la funcion';
+num_lines = 1;
+def = {'15','5'};
+answer = inputdlg(prompt,dlg_title,num_lines,def);
+
+img=handles.a_Image;              %Lectura de la imagen
+[Salida]=White(img,answer);
+
+axes(handles.img_salida);
+imshow(Salida);
+
+axes( handles.Hist ); 
+[H,N]=imhist(img);
+bar(N,H)
+xlim([N(1) N(end)])
 
 
 % --------------------------------------------------------------------
@@ -427,6 +442,59 @@ axes( handles.Hist );
 bar(N,H)
 xlim([N(1) N(end)])
 
+
+% --------------------------------------------------------------------
+function Th_l_ya_Callback(hObject, eventdata, handles)
+% hObject    handle to Th_l_ya (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function Th_l_ei_Callback(hObject, eventdata, handles)
+% hObject    handle to Th_l_ei (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+prompt = {'t='};
+dlg_title = 'Datos para la funcion';
+num_lines = 1;
+def = {'15'};
+answer = inputdlg(prompt,dlg_title,num_lines,def);
+
+img=handles.a_Image;              %Lectura de la imagen
+[Salida]=th_eikvil(img,answer);
+
+axes(handles.img_salida);
+imshow(~Salida);
+
+axes( handles.Hist ); 
+[H,N]=imhist(img);
+bar(N,H)
+xlim([N(1) N(end)])
+
+% --------------------------------------------------------------------
+function Th_l_ka_Callback(hObject, eventdata, handles)
+% hObject    handle to Th_l_ka (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+prompt = {'b=','T0='};
+dlg_title = 'Datos para la funcion';
+num_lines = 1;
+def = {'3','5'};
+answer = inputdlg(prompt,dlg_title,num_lines,def);
+valor=str2double(answer);
+img=handles.a_Image;              %Lectura de la imagen
+[Salida]=th_kamel(img,valor(1),valor(2));
+
+axes(handles.img_salida);
+imshow(~Salida);
+
+axes( handles.Hist ); 
+[H,N]=imhist(img);
+bar(N,H)
+xlim([N(1) N(end)])
+
+
 % --------------------------------------------------------------------
 function Th_l_pa_Callback(hObject, eventdata, handles)
 % hObject    handle to Th_l_pa (see GCBO)
@@ -449,22 +517,25 @@ axes( handles.Hist );
 bar(N,H)
 xlim([N(1) N(end)])
 
-% --------------------------------------------------------------------
-function Th_l_ya_Callback(hObject, eventdata, handles)
-% hObject    handle to Th_l_ya (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
 
 % --------------------------------------------------------------------
-function Th_l_ei_Callback(hObject, eventdata, handles)
-% hObject    handle to Th_l_ei (see GCBO)
+function th_l_p_Callback(hObject, eventdata, handles)
+% hObject    handle to th_l_p (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+prompt = {'T1=','T2=','T3=','T4=','T5'};
+dlg_title = 'Datos para la funcion';
+num_lines = 1;
+def = {'15','15','0.84','0.90','2'};
+answer = inputdlg(prompt,dlg_title,num_lines,def);
+valor=str2double(answer);
+img=handles.a_Image;              %Lectura de la imagen
+[Salida]=th_palumbo(img,valor);
 
+axes(handles.img_salida);
+imshow(~Salida);
 
-% --------------------------------------------------------------------
-function Th_l_ka_Callback(hObject, eventdata, handles)
-% hObject    handle to Th_l_ka (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+axes( handles.Hist ); 
+[H,N]=imhist(img);
+bar(N,H)
+xlim([N(1) N(end)])
