@@ -10,7 +10,9 @@ G=[1 1 1;1 0 1; 1 1 1];
 
 I_Pad=padarray(img,[1 1]);
 [y,x]=size(I_Pad);
-
+%se calcula el maximo brillo del gradiante en la vecindad de 8, para luego
+%calcular D obteniendo el minimo de la diferencia de la imagen con la
+%matriz aux
  for i=2:y-1
      for j=2:x-1
          aux=G.*double(I_Pad(i-1:i+1,j-1:j+1));
@@ -18,10 +20,10 @@ I_Pad=padarray(img,[1 1]);
          D(i-1,j-1)=min(min(double(I_Pad(i,j))-double(aux)));
      end
  end
- 
+ %Calculo de la media y desviacion estandar
  Media = imfilter(D,Kernel,'replicate');
  Desviacion=stdfilt(D,Kernel_d);
- 
+ %se asigna 0 o 1 depdendiendo de la condición que se cumpla
  Salida=zeros(size(img));
 for i=1:numel(img)
     if Media(i)>=m0 || Desviacion(i)<s0
