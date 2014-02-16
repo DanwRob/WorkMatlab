@@ -1,35 +1,34 @@
+% ------------------------------------------------------------------------
+% Materia: Vision por Computadora
+%
+% Nombre: Dan Williams Robledo Cruz
+% 
+% Fecha: 15 de Febrero 2014
+% 
+% Tarea No:2
+% 
+% Titulo: Segmentacion basada en crecimiento de region
+% 
+% ------------------------------------------------------------------------
+
+
+
 clear all; clc; close all;
 addpath('./Imagenes');
 
-img=imread('tomografia.tif');
-img=mat2gray(img);
-[H,W]=size(img);
-S=imread('semillas.tif');
+img=imread('tomografia.tif');   %Imagen de entrada
+S=imread('semillas.tif');       %Semillas a usar
 
-idx=find(S==255);
+Q=[0.05, 0.08, 0.2];            %Predicados de cada region
 
-Q=[0.05,0.08,0.2];
-miu=img(idx(1));
-d=0;
-n=1;
-[Y,X]=find(S==255);
-buffer=ones(10000,3);
+[I,Iq]=regrow(img,S,Q,1);       %llamar el metodo regrow
 
 
-while(d<Q)
-    
-    sum=0;
-    for y=Y-1:Y+1
-        for x=X-1:X+1
-          if x>0 && x<=H && y>0 && y<W
-                find(x==buffer(:,1))
-                find(y==buffer(:,2))
-             
-              
-          end
-        end
-    end
-
-    
-    
-end
+%Mostrar objetos segmentados
+figure;
+subplot 221; imshow(img); title('Imagen Original');
+subplot 222; imshow(Iq(:,:,1),[]); title('Region 1');
+subplot 223; imshow(Iq(:,:,2),[]); title('Region 2');
+subplot 224; imshow(Iq(:,:,3),[]); title('Region 3');
+figure;
+imshow(label2rgb(I)); title('Imagen segmentada y etiquetada');
