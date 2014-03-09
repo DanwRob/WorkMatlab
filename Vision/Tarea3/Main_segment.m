@@ -1,3 +1,18 @@
+% ------------------------------------------------------------------------
+% Materia: Vision por Computadora
+%
+% Nombre: Dan Williams Robledo Cruz
+% 
+% Fecha: 5 de Marzo 2014
+% 
+% Tarea No:3
+% 
+% Titulo: Segmentación detección de movimiento
+% 
+% ------------------------------------------------------------------------
+
+
+
 function varargout = Main_segment(varargin)
 % MAIN_SEGMENT MATLAB code for Main_segment.fig
 %      MAIN_SEGMENT, by itself, creates a new MAIN_SEGMENT or raises the existing
@@ -54,6 +69,7 @@ function Main_segment_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for Main_segment
 handles.output = hObject;
+handles.Path=[];
 handles.fileNames=[];
 handles.Salvar=[];
 % Update handles structure
@@ -75,17 +91,17 @@ varargout{1} = handles.output;
 
 
 % --- Executes on button press in save.
-function save_Callback(hObject, eventdata, handles)
+function save_Callback(hObject, eventdata, handles)                     %%Funcion para guardar secuencias de imagenes
 % hObject    handle to save (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 guidata(hObject, handles);
-[PathFile]=uigetdir;
+%[PathFile]=uigetdir;
 [y,x,z]=size(handles.Salvar);
-path=strcat(PathFile,'/secuencias/');
-mkdir(path);
+path=strcat(handles.Path,'/secuencias/');
+mkdir(path);                                        %crea un directorio para guardar la nueva secuencia
 for i=1:z
-save=strcat(path,'segment_',num2str(i),'.tif');
+save=strcat(path,'/segment_',num2str(i),'.tif');
 imwrite(handles.Salvar(:,:,i),save);
 end
 
@@ -118,21 +134,22 @@ function segment_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 guidata(hObject, handles);
-fondo=imread(handles.fileNames{1});
+
+fondo=imread(strcat(handles.Path,'/',handles.fileNames{1}));    %se asigana la imagen de fondo
 fondo=double(rgb2gray(fondo));
-numFrames = numel(handles.fileNames);
-T = str2num(get(handles.t,'string'));
-Area = str2num(get(handles.area,'string'));
-[y,x]=size(fondo);
-SE = strel('square',2);
-handles.Salvar=zeros(y,x,numFrames);
-deli=get(handles.delinear,'Value');
-if deli==0
+numFrames = numel(handles.fileNames);                           %total de frames de la secuencia
+T = str2num(get(handles.t,'string'));                           %umbral T
+Area = str2num(get(handles.area,'string'));                     %Area
+[y,x]=size(fondo);  
+SE = strel('square',2);                                         %elemento estructurante
+handles.Salvar=zeros(y,x,numFrames);                            %matriz para guardar la secuencia nueva
+deli=get(handles.delinear,'Value');                             
+if deli==0                                                      %deliniear True|False
     for i=2:numFrames
-    I=imread(handles.fileNames{i});
+    I=imread(strcat(handles.Path,'/',handles.fileNames{i}));    %lee el siguiente frame
     axes(handles.img_original);
     imshow(I)
-    Salida=segmotion(fondo,I,T,Area,SE);
+    Salida=segmotion(fondo,I,T,Area,SE);                        %llamado a la funcion segmotion
     handles.Salvar(:,:,i)=Salida;
     axes(handles.img_segment);
     imshow(Salida,[]);
@@ -140,23 +157,22 @@ if deli==0
     end
 else
     for i=2:numFrames
-    I=imread(handles.fileNames{i});
+    I=imread(strcat(handles.Path,'/',handles.fileNames{i}));     %lee el siguiente frame
     axes(handles.img_original);hold on;
     imshow(I)
-    Salida=segmotion(fondo,I,T,Area,SE);
+    Salida=segmotion(fondo,I,T,Area,SE);                         %llamado a la funcion segmotion
     handles.Salvar(:,:,i)=Salida;
-    [B,~] = bwboundaries(Salida,'noholes'); 
+    [B,~] = bwboundaries(Salida,'noholes');                     %obtiene contorno
     for k = 1:length(B)
          boundary = B{k};
     end
     if(length(B)>0)
-        %plot(boundary(:,2), boundary(:,1), 'y','LineWidth', 2);
-        plot(boundary(:,2), boundary(:,1), 'r','LineWidth', 1);
+        plot(boundary(:,2), boundary(:,1), 'r','LineWidth', 1);     %dibuja contorno
         clear B;        
         hold off;
     end
     axes(handles.img_segment);
-    imshow(Salida,[]);hold on;
+    imshow(Salida,[]);
     pause(0.01)
     end
     
@@ -171,13 +187,13 @@ function open_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 [PathFile]=uigetdir;
-dirOutput = dir(fullfile(PathFile,'*.tif'));
-handles.fileNames = {dirOutput.name};
- set(handles.segment,'Enable','on')
- set(handles.area,'Enable','on')
- set(handles.t,'Enable','on')
- set(handles.delinear,'Enable','on')
- 
+dirOutput = dir(fullfile(PathFile,'*.tif'));   %
+handles.fileNames = {dirOutput.name};           %
+ set(handles.segment,'Enable','on')     %activa boton de segmentar
+ set(handles.area,'Enable','on')        %activa EditText de area
+ set(handles.t,'Enable','on')           %activa EditText de umbral T
+ set(handles.delinear,'Enable','on')    %activa chek botton 
+ handles.Path=PathFile;
 guidata(hObject,handles);
 
 
