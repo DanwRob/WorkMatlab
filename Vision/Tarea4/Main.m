@@ -1,0 +1,9 @@
+I=imread('cameraman.tif');
+I=mat2gray(I);
+r=1;iteracion=4;
+af=0.1;al=1.0;at=1.0;vf=0.5;vl=0.2;vt=20;b=0.1;
+f=0.9;g=0.8;h=20;
+%a=pcnn(I,af,al,at,vf,vl,vt,b,r,iteracion);
+%a=icm(I,f,g,h,r,iteracion);
+%a=spcnn1(I,at,vt,b,r,iteracion);
+a=spcnn2(I,at,b,r,iteracion);
